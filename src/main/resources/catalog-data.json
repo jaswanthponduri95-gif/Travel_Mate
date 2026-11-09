@@ -1,0 +1,437 @@
+{
+  "destinations": [
+    {
+      "id": "mysuru",
+      "name": "Mysuru",
+      "state": "Karnataka",
+      "tagline": "City of Palaces, Sandalwood & Royal Heritage",
+      "image": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=800&q=80",
+      "description": "Steeped in royal grandeur, Mysuru captivates travelers with its illuminated palace, silk bazaars, Chamundi hills, and ancient stone temples.",
+      "suggestedDays": 3,
+      "bestSeason": "October to March (Pleasant winter & Dasara celebrations)",
+      "budgetRange": "₹4,500 – ₹12,000 / person",
+      "coordinates": [
+        12.3051,
+        76.6551
+      ],
+      "category": "Heritage",
+      "region": "South",
+      "highlights": [
+        "Mysore Palace",
+        "Chamundi Hill",
+        "Brindavan Gardens",
+        "Devaraja Market",
+        "St. Philomena's Cathedral"
+      ],
+      "cuisine": [
+        "Mysore Pak",
+        "Mylari Masala Dosa",
+        "Filter Coffee",
+        "Bisi Bele Bath"
+      ]
+    },
+    {
+      "id": "ooty",
+      "name": "Ooty",
+      "state": "Tamil Nadu",
+      "tagline": "Queen of Hill Stations & Nilgiri Mountain Railway",
+      "image": "https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=800&q=80",
+      "description": "Nestled in the Nilgiri Hills, Ooty offers mist-covered tea plantations, historic toy trains, serene lakes, and crisp mountain breeze.",
+      "suggestedDays": 3,
+      "bestSeason": "October to June",
+      "budgetRange": "₹6,000 – ₹15,000 / person",
+      "coordinates": [
+        11.4102,
+        76.695
+      ],
+      "category": "Hill Station",
+      "region": "South",
+      "highlights": [
+        "Botanical Gardens",
+        "Ooty Lake",
+        "Doddabetta Peak",
+        "Nilgiri Mountain Railway",
+        "Tea Factory"
+      ],
+      "cuisine": [
+        "Homemade Chocolates",
+        "Nilgiri Tea",
+        "Steaming Vada & Sambar"
+      ]
+    },
+    {
+      "id": "jaipur",
+      "name": "Jaipur",
+      "state": "Rajasthan",
+      "tagline": "The Pink City of Forts, Palaces & Vibrant Bazars",
+      "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80",
+      "description": "The capital of Rajasthan, famed for honeycomb Hawa Mahal, imposing Amber Fort, royal courtyards, and handcrafted jewelry.",
+      "suggestedDays": 3,
+      "bestSeason": "November to February",
+      "budgetRange": "₹7,000 – ₹18,000 / person",
+      "coordinates": [
+        26.9124,
+        75.7873
+      ],
+      "category": "Heritage",
+      "region": "North",
+      "highlights": [
+        "Amber Fort",
+        "Hawa Mahal",
+        "City Palace",
+        "Jantar Mantar",
+        "Nahargarh Fort"
+      ],
+      "cuisine": [
+        "Dal Baati Churma",
+        "Pyaaz Kachori",
+        "Ghevar",
+        "Lal Maas"
+      ]
+    },
+    {
+      "id": "goa",
+      "name": "Goa",
+      "state": "Goa",
+      "tagline": "Sun-Kissed Beaches, Portuguese Heritage & Coastal Cuisine",
+      "image": "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80",
+      "description": "India's premier coastal haven, combining palm-fringed sands, whitewashed Baroque churches, water sports, and laid-back cafes.",
+      "suggestedDays": 4,
+      "bestSeason": "November to March",
+      "budgetRange": "₹8,000 – ₹22,000 / person",
+      "coordinates": [
+        15.2993,
+        74.124
+      ],
+      "category": "Beach",
+      "region": "West",
+      "highlights": [
+        "Palolem Beach",
+        "Basilica of Bom Jesus",
+        "Fort Aguada",
+        "Dudhsagar Falls",
+        "Anjuna Flea Market"
+      ],
+      "cuisine": [
+        "Goan Fish Curry",
+        "Prawn Balchão",
+        "Bebinca",
+        "Poee with Chorizo"
+      ]
+    },
+    {
+      "id": "munnar",
+      "name": "Munnar",
+      "state": "Kerala",
+      "tagline": "Rolling Emerald Tea Hills & Misty Waterfalls",
+      "image": "https://images.unsplash.com/photo-1506461883276-594a12b11cf3?auto=format&fit=crop&w=800&q=80",
+      "description": "An idyllic high-altitude getaway with carpeted green tea estates, endangered Nilgiri Tahr at Eravikulam, and cool mountain clouds.",
+      "suggestedDays": 3,
+      "bestSeason": "September to April",
+      "budgetRange": "₹6,500 – ₹16,000 / person",
+      "coordinates": [
+        10.0889,
+        77.0595
+      ],
+      "category": "Nature",
+      "region": "South",
+      "highlights": [
+        "Eravikulam National Park",
+        "Mattupetty Dam",
+        "Tea Museum",
+        "Top Station",
+        "Attukad Waterfalls"
+      ],
+      "cuisine": [
+        "Kerala Sadya",
+        "Appam with Stew",
+        "Cardamom Tea",
+        "Karimeen Pollichathu"
+      ]
+    },
+    {
+      "id": "hyderabad",
+      "name": "Hyderabad",
+      "state": "Telangana",
+      "tagline": "City of Pearls, Qutb Shahi Forts & World-Famous Biryani",
+      "image": "https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=800&q=80",
+      "description": "Where 400-year-old Nizami heritage blends seamlessly with cutting-edge tech parks, aromatic dum biryani, and monolithic Charminar.",
+      "suggestedDays": 3,
+      "bestSeason": "October to March",
+      "budgetRange": "₹5,000 – ₹14,000 / person",
+      "coordinates": [
+        17.385,
+        78.4867
+      ],
+      "category": "Heritage",
+      "region": "South",
+      "highlights": [
+        "Charminar",
+        "Golconda Fort",
+        "Chowmahalla Palace",
+        "Ramoji Film City",
+        "Hussain Sagar Lake"
+      ],
+      "cuisine": [
+        "Hyderabadi Dum Biryani",
+        "Mirchi Ka Salan",
+        "Double Ka Meetha",
+        "Irani Chai & Osmania Biscuits"
+      ]
+    }
+  ],
+  "transport_options": [
+    {
+      "id": "tr-001",
+      "mode": "train",
+      "modeName": "Train",
+      "icon": "bi-train-front",
+      "provider": "Indian Railways",
+      "number": "Provider listing",
+      "depTime": "Varies by service",
+      "arrTime": "Varies by service",
+      "duration": "1h 45m",
+      "price": 540,
+      "priceCategory": "Indicative estimate",
+      "availability": "Check provider for live availability",
+      "features": [
+        "AC Chair Car",
+        "Breakfast Included",
+        "High-Speed 130 km/h",
+        "Clean Restrooms"
+      ]
+    },
+    {
+      "id": "tr-002",
+      "mode": "train",
+      "modeName": "Train",
+      "icon": "bi-train-front",
+      "provider": "Indian Railways",
+      "number": "Provider listing",
+      "depTime": "Varies by service",
+      "arrTime": "Varies by service",
+      "duration": "Check route",
+      "price": 135,
+      "priceCategory": "Indicative estimate",
+      "availability": "Check provider for live availability",
+      "features": [
+        "Second Seating (2S)",
+        "Onboard Snacks"
+      ]
+    },
+    {
+      "id": "tr-003",
+      "mode": "bus",
+      "modeName": "Bus",
+      "icon": "bi-bus-front",
+      "provider": "KSRTC Bus Services",
+      "number": "Provider listing",
+      "depTime": "Varies by service",
+      "arrTime": "Varies by service",
+      "duration": "Check route",
+      "price": 380,
+      "priceCategory": "Indicative estimate",
+      "availability": "Check provider for live availability",
+      "features": [
+        "Volvo Multi-Axle AC",
+        "Water Bottle Provided",
+        "Reclining Seats"
+      ]
+    },
+    {
+      "id": "tr-004",
+      "mode": "bus",
+      "modeName": "Bus",
+      "icon": "bi-bus-front",
+      "provider": "KSRTC Bus Services",
+      "number": "Provider listing",
+      "depTime": "Varies by service",
+      "arrTime": "Varies by service",
+      "duration": "Check route",
+      "price": 800,
+      "priceCategory": "Indicative estimate",
+      "availability": "Check provider for live availability",
+      "features": [
+        "Luggage Storage",
+        "Live Flight Tracking"
+      ]
+    },
+    {
+      "id": "tr-005",
+      "mode": "flight",
+      "modeName": "Flight",
+      "icon": "bi-airplane",
+      "provider": "Domestic Airline Providers",
+      "number": "Provider listing",
+      "depTime": "Varies by service",
+      "arrTime": "Varies by service",
+      "duration": "50m",
+      "price": 1850,
+      "priceCategory": "Indicative estimate",
+      "availability": "Check provider for live availability",
+      "features": [
+        "ATR-72 Turboprop",
+        "15kg Check-in Baggage",
+        "Quick Boarding"
+      ]
+    },
+    {
+      "id": "tr-006",
+      "mode": "car",
+      "modeName": "Cab / Self-Drive",
+      "icon": "bi-car-front",
+      "provider": "Cab and Self-Drive Providers",
+      "number": "Provider listing",
+      "depTime": "Varies by service",
+      "arrTime": "Varies by service",
+      "duration": "Check route",
+      "price": 2450,
+      "priceCategory": "Indicative estimate",
+      "availability": "Check provider for live availability",
+      "features": [
+        "Door-to-door Convenience",
+        "Photogenic Pit-Stops",
+        "AC Vehicle"
+      ]
+    }
+  ],
+  "hotels": [
+    {
+      "id": "ht-001",
+      "name": "Grand Mercure Mysuru — Accor",
+      "destination": "Mysuru",
+      "type": "Luxury / Heritage",
+      "rating": 4.6,
+      "reviewsCount": 1420,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=700&q=80",
+      "pricePerNight": 4200,
+      "distanceToCenter": "3.2 km from Mysore Palace",
+      "amenities": [
+        "Free High-Speed Wi-Fi",
+        "Swimming Pool",
+        "Complimentary Breakfast",
+        "Free Parking",
+        "Spa & Wellness"
+      ],
+      "description": "Set in the historic city, this premium hotel blends local Hoysala architecture with international Accor hospitality.",
+      "badge": "TravelMate Top Pick"
+    },
+    {
+      "id": "ht-002",
+      "name": "Radisson Blu Plaza Hotel Mysore",
+      "destination": "Mysuru",
+      "type": "5-Star Luxury",
+      "rating": 4.7,
+      "reviewsCount": 2310,
+      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=700&q=80",
+      "pricePerNight": 5800,
+      "distanceToCenter": "1.5 km from Mysore Zoo & Palace",
+      "amenities": [
+        "Panoramic Mountain View",
+        "Rooftop Pool",
+        "Fine Dining",
+        "Fitness Center",
+        "Airport Shuttle"
+      ],
+      "description": "Overlooking the Chamundi Hills, with immediate proximity to the Golf Club and Mysore Palace.",
+      "badge": "Luxury Favorite"
+    },
+    {
+      "id": "ht-003",
+      "name": "Roamer Heritage Haveli & Homestay",
+      "destination": "Mysuru",
+      "type": "Heritage Homestay",
+      "rating": 4.5,
+      "reviewsCount": 680,
+      "image": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=700&q=80",
+      "pricePerNight": 1950,
+      "distanceToCenter": "1.1 km from Devaraja Market",
+      "amenities": [
+        "Traditional Courtyard",
+        "Home-Cooked Breakfast",
+        "Free Wi-Fi",
+        "Bicycle Rental",
+        "Library"
+      ],
+      "description": "A meticulously restored 1920s courtyard home offering tranquil heritage vibes and personal host attention.",
+      "badge": "Best Value"
+    },
+    {
+      "id": "ht-004",
+      "name": "The Viceroy Comforts",
+      "destination": "Mysuru",
+      "type": "Budget Boutique",
+      "rating": 4.2,
+      "reviewsCount": 890,
+      "image": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=700&q=80",
+      "pricePerNight": 1450,
+      "distanceToCenter": "500 m walking to Palace North Gate",
+      "amenities": [
+        "AC Rooms",
+        "24/7 Front Desk",
+        "Pure Veg Restaurant",
+        "Free Wi-Fi"
+      ],
+      "description": "Unbeatable central location right across the street from the Maharaja Palace gates.",
+      "badge": "Prime Location"
+    }
+  ],
+  "restaurants": [
+    {
+      "id": "rest-001",
+      "name": "Hotel Original Vinayaka Mylari",
+      "destination": "Mysuru",
+      "cuisine": "Authentic Karnataka Dosa & Filter Coffee",
+      "mealType": "Breakfast / Snack",
+      "pricePerPerson": 120,
+      "rating": 4.8,
+      "reviewsCount": 3800,
+      "image": "https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&w=600&q=80",
+      "distanceToStop": "Near Nazarbad & Mysore Palace",
+      "dietary": "Vegetarian Friendly",
+      "specialty": "Mylari Special Butter Dosa with Sagoo"
+    },
+    {
+      "id": "rest-002",
+      "name": "RRR Biryani & Andhra Restaurant",
+      "destination": "Mysuru",
+      "cuisine": "Spicy Andhra Biryani & Coastal Non-Veg",
+      "mealType": "Lunch / Dinner",
+      "pricePerPerson": 350,
+      "rating": 4.5,
+      "reviewsCount": 2900,
+      "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
+      "distanceToStop": "Gandhi Square, 800m from Palace",
+      "dietary": "Non-Veg Specialty",
+      "specialty": "Mutton Biryani served on Banana Leaf"
+    },
+    {
+      "id": "rest-003",
+      "name": "Gufha Restaurant — The President Hotel",
+      "destination": "Mysuru",
+      "cuisine": "Indian, Mughlai & Frontier Kebabs",
+      "mealType": "Dinner",
+      "pricePerPerson": 550,
+      "rating": 4.4,
+      "reviewsCount": 1650,
+      "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80",
+      "distanceToStop": "Irwin Road, Mysore Center",
+      "dietary": "Multi-Cuisine",
+      "specialty": "Cave-themed ambient dining with Kakori Kebab"
+    },
+    {
+      "id": "rest-004",
+      "name": "Depth N Green Cafe",
+      "destination": "Mysuru",
+      "cuisine": "Organic, Vegan & Artisanal Bakery",
+      "mealType": "Breakfast / Cafe",
+      "pricePerPerson": 280,
+      "rating": 4.6,
+      "reviewsCount": 940,
+      "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+      "distanceToStop": "Gokulam (Yoga District)",
+      "dietary": "Vegan & Health-Conscious",
+      "specialty": "Avocado Sourdough Toast & Cold Brew"
+    }
+  ]
+}

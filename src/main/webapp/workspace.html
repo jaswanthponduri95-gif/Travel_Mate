@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itinerary Workspace — TravelMate</title>
+  <meta name="description" content="Wanderlog-inspired unified trip workspace. Day-wise timeline and synchronized interactive map.">
+  
+  <!-- Bootstrap 5 CSS & Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Leaflet Interactive Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <!-- TravelMate Master Design System -->
+  <link rel="stylesheet" href="css/travelmate.css">
+
+  <style>
+    /* Workspace Specific Custom Tweaks */
+    .tm-custom-marker {
+      background: transparent;
+      border: none;
+    }
+    #ws-map-container {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= GLOBAL NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg tm-navbar">
+    <div class="container-fluid px-lg-4">
+      <a class="tm-brand" href="index.html">
+        <div class="tm-brand-logo"><i class="bi bi-compass"></i></div>
+        <span>TravelMate</span>
+        <span class="tm-brand-badge">Trip Planner</span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#tmNavbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="tmNavbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="explore.html"><i class="bi bi-compass"></i> Explore</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="plan.html"><i class="bi bi-magic"></i> Plan</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link active" href="workspace.html"><i class="bi bi-map"></i> Itinerary</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="transport.html"><i class="bi bi-train-front"></i> Transport</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="hotels.html"><i class="bi bi-building"></i> Hotels</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="food.html"><i class="bi bi-cup-hot"></i> Food</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="budget.html"><i class="bi bi-wallet2"></i> Budget</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="weather.html"><i class="bi bi-cloud-sun"></i> Weather</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="trips.html"><i class="bi bi-journal-bookmark"></i> My Trips</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="tm-btn tm-btn-outline tm-btn-sm" onclick="showShareExportModal()">
+            <i class="bi bi-share"></i> Share / Export
+          </button>
+          <a href="plan.html" class="tm-btn tm-btn-primary tm-btn-sm">
+            <i class="bi bi-pencil-square"></i> Edit Trip
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= TRIP HEADER BAR ================= -->
+  <div class="bg-white border-bottom py-2 px-lg-4 px-3">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div class="d-flex align-items-center gap-3">
+        <div>
+          <div class="d-flex align-items-center gap-2">
+            <h4 class="fw-bold m-0 text-dark" id="ws-trip-title">Mysuru Royal Heritage & Nature Trails</h4>
+            <span class="tm-badge tm-badge-primary" id="ws-trip-destination">Mysuru</span>
+          </div>
+          <div class="d-flex flex-wrap align-items-center gap-3 small text-muted mt-1">
+            <span><i class="bi bi-calendar3"></i> <span id="ws-trip-dates">Nov 14 – Nov 16, 2026 (3 Days)</span></span>
+            <span>&bull;</span>
+            <span><i class="bi bi-people"></i> <span id="ws-trip-travelers">2 Travelers</span></span>
+            <span>&bull;</span>
+            <span class="fw-semibold text-dark"><i class="bi bi-wallet2 text-success"></i> Est. Budget: <span id="ws-trip-budget" class="text-success">₹18,000</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <a href="transport.html" class="tm-btn tm-btn-outline tm-btn-sm">
+          <i class="bi bi-train-front"></i> Transport Compare
+        </a>
+        <a href="budget.html" class="tm-btn tm-btn-outline tm-btn-sm">
+          <i class="bi bi-currency-rupee"></i> Budget Breakdown
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MOBILE SWITCHER BAR (Visible on < 992px) ================= -->
+  <div class="tm-mobile-switcher">
+    <button class="tm-mobile-switcher-btn active" id="mob-switch-itinerary">
+      <i class="bi bi-card-checklist"></i> Itinerary Stops
+    </button>
+    <button class="tm-mobile-switcher-btn" id="mob-switch-map">
+      <i class="bi bi-map-fill"></i> Interactive Map
+    </button>
+  </div>
+
+  <!-- ================= MAIN WORKSPACE (SPLIT LAYOUT) ================= -->
+  <div class="tm-workspace-layout">
+    
+    <!-- LEFT SIDE: ITINERARY TIMELINE PANEL -->
+    <div class="tm-workspace-sidebar tm-mobile-hide-on-map">
+      
+      <!-- AI plan status (the AI tour plan runs automatically when a trip is opened) -->
+      <div id="ws-ai-banner" class="d-none"></div>
+
+      <!-- Weather Alert Banner (Dynamic) -->
+      <div id="ws-weather-banner"></div>
+
+      <!-- Day Selector Tabs -->
+      <div class="mb-3">
+        <div class="tm-day-tabs" id="ws-day-tabs">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Active Day Header & Action Toolbar -->
+      <div id="ws-day-toolbar" class="d-flex flex-wrap justify-content-between align-items-center bg-white p-3 rounded-3 border mb-3">
+        <div>
+          <h5 class="fw-bold m-0 text-dark" id="ws-day-title">Day 1: Royal Palaces & Grand Bazaars</h5>
+          <small class="text-muted" id="ws-day-summary">3 stops • 4.5 hrs planned • ~14 km local transit</small>
+        </div>
+
+        <div class="d-flex gap-2 mt-2 mt-sm-0">
+          <button type="button" class="tm-btn tm-btn-outline tm-btn-sm" onclick="handleOptimizeRoute()" title="Reorder stops for shortest driving path">
+            <i class="bi bi-lightning-charge-fill text-warning"></i> Optimize Route
+          </button>
+          <button type="button" class="tm-btn tm-btn-accent tm-btn-sm" onclick="openAddStopModal()">
+            <i class="bi bi-plus-lg"></i> Add Stop
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick actions: responsive grid prevents clipping on desktop and mobile. -->
+      <nav class="ws-quick-actions mb-3" aria-label="Workspace quick actions">
+        <a href="food.html" class="ws-quick-action" aria-label="Add Restaurant Break">
+          <i class="bi bi-cup-hot text-danger" aria-hidden="true"></i>
+          <span>+ Add Restaurant Break</span>
+        </a>
+        <a href="hotels.html" class="ws-quick-action" aria-label="Change Hotel">
+          <i class="bi bi-building text-info" aria-hidden="true"></i>
+          <span>+ Change Hotel</span>
+        </a>
+        <a href="weather.html" class="ws-quick-action" aria-label="Weather Alternatives">
+          <i class="bi bi-cloud-sun text-warning" aria-hidden="true"></i>
+          <span>Weather Alternatives</span>
+        </a>
+      </nav>
+
+      <!-- Day Weather Summary & Advisory Card (Phase 7 Integration) -->
+      <div id="ws-day-weather-card"></div>
+
+      <!-- Chronological Vertical Stops Timeline -->
+      <div class="tm-timeline" id="ws-timeline-container">
+        <!-- Stops rendered dynamically via workspace.js -->
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE: INTERACTIVE LEAFLET MAP PANEL -->
+    <div class="tm-workspace-map tm-mobile-hide-on-itinerary">
+      <div id="ws-map-container"></div>
+
+      <!-- Floating place search (OpenStreetMap) -->
+      <div class="position-absolute top-0 end-0 m-3 bg-white rounded-3 shadow-sm border" style="z-index: 1000; width: min(340px, calc(100% - 80px));">
+        <form class="d-flex p-2 gap-1" onsubmit="handleMapSearch(event)">
+          <input type="search" class="form-control form-control-sm" id="ws-place-search" placeholder="Search places, e.g. Jaganmohan Palace" autocomplete="off" maxlength="200">
+          <button type="submit" class="btn btn-sm btn-primary" title="Search the map"><i class="bi bi-search"></i></button>
+        </form>
+        <div id="ws-place-results" class="border-top small d-none" style="max-height: 280px; overflow-y: auto;"></div>
+        <div class="px-2 pb-2 text-muted" style="font-size: 0.72rem;">Or click anywhere on the map to see what's there. Data © OpenStreetMap contributors.</div>
+      </div>
+
+      <!-- Floating Map Legend / Overlay -->
+      <div class="position-absolute bottom-0 start-0 m-3 p-2 bg-white bg-opacity-95 rounded-3 shadow-sm border small" style="z-index: 1000; max-width: 280px;">
+        <div class="fw-bold mb-1 text-dark d-flex align-items-center gap-1">
+          <i class="bi bi-info-circle text-primary"></i> Map Legend
+        </div>
+        <div class="d-flex align-items-center gap-2 mb-1">
+          <span style="display:inline-block; width:14px; height:14px; background:var(--tm-primary); border-radius:50%;"></span>
+          <span>Timeline Stops (Numbered)</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span style="display:inline-block; width:16px; height:3px; background:#E76F51;"></span>
+          <span>Daily Driving / Transit Route</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= ADD STOP MODAL ================= -->
+  <div class="modal fade" id="addStopModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content tm-modal-content">
+        <div class="modal-header tm-modal-header d-flex justify-content-between align-items-center">
+          <h5 class="modal-title fw-bold text-dark" id="stop-modal-title"><i class="bi bi-geo-alt-fill text-primary"></i> Add Stop to Itinerary</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="add-stop-form" onsubmit="handleSaveNewStop(event)">
+          <input type="hidden" id="edit-stop-id" value="">
+          <div class="modal-body tm-modal-body">
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-muted">PLACE / ATTRACTION NAME *</label>
+              <input type="text" class="form-control tm-form-control" id="new-stop-name" required placeholder="e.g. Jaganmohan Palace Art Gallery">
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label small fw-bold text-muted">CATEGORY</label>
+                <select class="form-select tm-form-control" id="new-stop-category">
+                  <option value="Heritage" selected>Heritage & Sightseeing</option>
+                  <option value="Food">Restaurant & Dining</option>
+                  <option value="Nature">Nature & Gardens</option>
+                  <option value="Shopping">Silk & Market Walk</option>
+                  <option value="Culture">Art & Culture</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label class="form-label small fw-bold text-muted">SCHEDULED TIME</label>
+                <input type="text" class="form-control tm-form-control" id="new-stop-time" value="03:00 PM" placeholder="e.g. 03:00 PM">
+              </div>
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label small fw-bold text-muted">EST. DURATION</label>
+                <input type="text" class="form-control tm-form-control" id="new-stop-duration" value="1.5 hrs" placeholder="e.g. 1.5 hrs">
+              </div>
+              <div class="col-6">
+                <label class="form-label small fw-bold text-muted">EST. COST (INR ₹)</label>
+                <input type="number" class="form-control tm-form-control" id="new-stop-cost" value="100" min="0">
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label small fw-bold text-muted">VISITOR NOTES & TIPS</label>
+              <textarea class="form-control tm-form-control" id="new-stop-notes" rows="2" placeholder="Entry fee details, royal paintings, opening timings..."></textarea>
+            </div>
+          </div>
+          <div class="modal-footer tm-modal-footer">
+            <button type="button" class="tm-btn tm-btn-outline" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="tm-btn tm-btn-primary" id="stop-modal-submit">Add Stop to Timeline</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= WEATHER ALTERNATIVE PROPOSAL MODAL ================= -->
+  <div class="modal fade" id="weatherAltModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content tm-modal-content">
+        <div class="modal-header tm-modal-header bg-warning-subtle d-flex justify-content-between align-items-center">
+          <h5 class="modal-title fw-bold text-dark d-flex align-items-center gap-2">
+            <i class="bi bi-cloud-lightning-rain-fill text-warning"></i> Smart Weather Alternative
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body tm-modal-body">
+          <div class="alert alert-warning py-2 px-3 small mb-3">
+            <strong>Advisory:</strong> <span id="alt-reason">Heavy afternoon shower & thunderstorm forecast (75% probability).</span>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <div class="p-3 bg-light rounded-3 border h-100">
+                <span class="badge bg-secondary mb-1">ORIGINAL (OUTDOOR)</span>
+                <h6 class="fw-bold mb-1 text-dark" id="alt-original-name">Brindavan Gardens</h6>
+                <small class="text-muted d-block" id="alt-original-cat">Outdoor Gardens</small>
+                <span class="badge bg-danger-subtle text-danger mt-2">Rain Disruption Risk</span>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="p-3 bg-success-subtle rounded-3 border border-success h-100">
+                <span class="badge bg-success mb-1">RECOMMENDED REPLACEMENT</span>
+                <h6 class="fw-bold mb-1 text-dark" id="alt-recommended-name">Mysuru Rail Museum</h6>
+                <small class="text-muted d-block" id="alt-recommended-cat">Indoor Heritage</small>
+                <span class="badge bg-success mt-2">100% Sheltered</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-2 bg-light rounded-2 border small text-muted mb-2">
+            <i class="bi bi-clock-history text-primary"></i> <span id="alt-impact">Same duration (2h 15m), zero schedule delay • Saves ₹40</span>
+          </div>
+        </div>
+        <div class="modal-footer tm-modal-footer">
+          <button type="button" class="tm-btn tm-btn-outline" data-bs-dismiss="modal">Keep Original</button>
+          <button type="button" class="tm-btn tm-btn-accent" id="alt-accept-btn" onclick="handleToggleWeatherAlt()">
+            Accept Smart Alternative
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Leaflet Interactive Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/workspace.js"></script>
+  <script src="js/places.js"></script>
+</body>
+</html>

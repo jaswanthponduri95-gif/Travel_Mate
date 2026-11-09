@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Settings — TravelMate</title>
+  <meta name="description" content="Choose the AI model, API key and base URL TravelMate uses to generate itineraries.">
+
+  <!-- Bootstrap 5 CSS & Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- TravelMate Master Design System -->
+  <link rel="stylesheet" href="css/travelmate.css">
+</head>
+<body>
+
+  <!-- ================= GLOBAL NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg tm-navbar">
+    <div class="container-xl">
+      <a class="tm-brand" href="index.html">
+        <div class="tm-brand-logo"><i class="bi bi-compass"></i></div>
+        <span>TravelMate</span>
+        <span class="tm-brand-badge">AI Settings</span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#tmNavbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="tmNavbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="explore.html"><i class="bi bi-compass"></i> Explore</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="plan.html"><i class="bi bi-magic"></i> Plan a Trip</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="workspace.html"><i class="bi bi-map"></i> Itinerary</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="trips.html"><i class="bi bi-journal-bookmark"></i> My Trips</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="about.html"><i class="bi bi-info-circle"></i> About</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a href="auth.html" class="tm-btn tm-btn-outline tm-btn-sm" id="nav-signin-btn"><i class="bi bi-person"></i> Sign In</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= SUBHEADER ================= -->
+  <div class="bg-white border-bottom py-3">
+    <div class="container-xl d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-1 small">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">AI Settings</li>
+          </ol>
+        </nav>
+        <h3 class="fw-bold m-0 text-dark">AI Model Settings</h3>
+      </div>
+      <span class="tm-badge" id="ai-status-badge">Loading…</span>
+    </div>
+  </div>
+
+  <div class="container-xl py-4">
+    <!-- Shown when not signed in -->
+    <div class="alert alert-warning d-none" id="ai-signin-required">
+      <i class="bi bi-lock-fill"></i> Please <a href="auth.html" class="alert-link">sign in</a> to view or change the AI settings.
+      They hold your API key, so they are protected.
+    </div>
+    <!-- Shown when signed in but not on the owners' list -->
+    <div class="alert alert-secondary d-none" id="ai-forbidden">
+      <i class="bi bi-shield-lock-fill"></i> The AI settings are only available to the TravelMate owners.
+      AI trip plans still appear automatically once an owner has set up a model.
+    </div>
+    <div class="alert alert-danger d-none" id="ai-offline">
+      <i class="bi bi-cloud-slash-fill"></i> The TravelMate server is not reachable. Start it (<code>mvn jetty:run</code>) to configure AI.
+    </div>
+
+    <div class="row g-4 d-none" id="ai-settings-body">
+      <div class="col-lg-8">
+        <div class="alert alert-info small py-2 mb-3">
+          <i class="bi bi-people-fill"></i> Shared setup: these settings are saved in the common TravelMate database,
+          so everyone using it gets the same AI model without entering a key of their own.
+        </div>
+        <form id="ai-settings-form" class="tm-card p-4 d-flex flex-column gap-3" onsubmit="handleSaveAiSettings(event)">
+          <div class="d-flex justify-content-between align-items-center border-bottom pb-3">
+            <h5 class="fw-bold m-0"><i class="bi bi-cpu text-primary"></i> Model Connection</h5>
+            <div class="form-check form-switch m-0">
+              <input class="form-check-input" type="checkbox" role="switch" id="ai-enabled">
+              <label class="form-check-label fw-semibold" for="ai-enabled">Use AI for trip planning</label>
+            </div>
+          </div>
+
+          <div>
+            <label for="ai-provider" class="tm-form-label">Provider preset</label>
+            <select class="form-select tm-form-control" id="ai-provider">
+              <option value="https://openrouter.ai/api/v1">OpenRouter</option>
+              <option value="https://api.openai.com/v1">OpenAI</option>
+              <option value="https://api.groq.com/openai/v1">Groq</option>
+              <option value="https://generativelanguage.googleapis.com/v1beta/openai">Google Gemini (OpenAI-compatible)</option>
+              <option value="https://api.together.xyz/v1">Together AI</option>
+              <option value="https://api.mistral.ai/v1">Mistral</option>
+              <option value="http://localhost:11434/v1">Ollama (local, no key)</option>
+              <option value="http://localhost:1234/v1">LM Studio (local, no key)</option>
+              <option value="custom">Custom / experimental lab endpoint</option>
+            </select>
+            <div class="form-text">Any API that speaks the OpenAI <code>/chat/completions</code> format works.</div>
+          </div>
+
+          <div>
+            <label for="ai-base-url" class="tm-form-label">Base URL</label>
+            <input type="url" class="form-control tm-form-control" id="ai-base-url" required placeholder="https://openrouter.ai/api/v1">
+            <div class="form-text">Up to and including the version path. TravelMate adds <code>/chat/completions</code> and <code>/models</code>.</div>
+          </div>
+
+          <div>
+            <label for="ai-api-key" class="tm-form-label">API key</label>
+            <div class="input-group">
+              <input type="password" class="form-control tm-form-control" id="ai-api-key" autocomplete="off" placeholder="Paste your key">
+              <button class="btn btn-outline-secondary" type="button" onclick="toggleKeyVisibility()" title="Show / hide"><i class="bi bi-eye"></i></button>
+            </div>
+            <div class="form-text" id="ai-key-help">Stored on the server only; it is never sent back to the browser.</div>
+            <div class="form-check mt-1 d-none" id="ai-clear-key-wrap">
+              <input class="form-check-input" type="checkbox" id="ai-clear-key">
+              <label class="form-check-label small" for="ai-clear-key">Remove the saved key</label>
+            </div>
+          </div>
+
+          <div>
+            <label for="ai-model" class="tm-form-label">Model id</label>
+            <div class="input-group">
+              <input type="text" class="form-control tm-form-control" id="ai-model" list="ai-model-list" placeholder="exact model id from your provider">
+              <button class="btn btn-outline-primary" type="button" id="ai-load-models-btn" onclick="handleLoadModels()">
+                <i class="bi bi-list-ul"></i> Load models
+              </button>
+            </div>
+            <datalist id="ai-model-list"></datalist>
+            <div class="form-text" id="ai-models-help">Type the id, or click "Load models" to pick from the provider's list.</div>
+          </div>
+
+          <details class="border rounded-3 p-3">
+            <summary class="fw-semibold">Advanced</summary>
+            <div class="row g-3 mt-1">
+              <div class="col-md-4">
+                <label for="ai-temperature" class="tm-form-label">Temperature</label>
+                <input type="number" class="form-control tm-form-control" id="ai-temperature" min="0" max="2" step="0.1">
+              </div>
+              <div class="col-md-4">
+                <label for="ai-max-tokens" class="tm-form-label">Max tokens</label>
+                <input type="number" class="form-control tm-form-control" id="ai-max-tokens" min="1" step="1">
+              </div>
+              <div class="col-md-4">
+                <label for="ai-timeout" class="tm-form-label">Timeout (seconds)</label>
+                <input type="number" class="form-control tm-form-control" id="ai-timeout" min="5" max="600">
+              </div>
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="ai-json-mode">
+                  <label class="form-check-label" for="ai-json-mode">JSON mode (<code>response_format: json_object</code>) — turn off if your model rejects it</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="ai-extra-headers" class="tm-form-label">Extra HTTP headers (one per line, <code>Name: value</code>)</label>
+                <textarea class="form-control tm-form-control font-monospace small" id="ai-extra-headers" rows="3" placeholder="X-Title: TravelMate"></textarea>
+              </div>
+            </div>
+          </details>
+
+          <div class="d-flex flex-wrap gap-2 border-top pt-3">
+            <button type="submit" class="tm-btn tm-btn-primary"><i class="bi bi-save"></i> Save Settings</button>
+            <button type="button" class="tm-btn tm-btn-outline" id="ai-test-btn" onclick="handleTestAi()"><i class="bi bi-plug"></i> Test Connection</button>
+            <button type="button" class="tm-btn tm-btn-outline ms-auto" onclick="handleResetAiSettings()"><i class="bi bi-arrow-counterclockwise"></i> Reset to file defaults</button>
+          </div>
+          <div id="ai-test-result" class="d-none"></div>
+        </form>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="tm-card p-4">
+          <h6 class="fw-bold"><i class="bi bi-lightbulb text-warning"></i> How it is used</h6>
+          <p class="small text-secondary">When AI is on, <a href="plan.html">Plan a Trip</a> sends your destination, dates, budget, pace and
+            interests to this model and saves the itinerary it returns. If the model fails, the planner falls back to the built-in template
+            and tells you why.</p>
+          <h6 class="fw-bold mt-3">Tips</h6>
+          <ul class="small text-secondary ps-3 mb-0">
+            <li>Use <strong>Test Connection</strong> before saving: it tries the values in the form.</li>
+            <li>Models with larger outputs need a higher <em>Max tokens</em> for long trips.</li>
+            <li>Changing the base URL to a different server removes the saved key, so your key is never sent to a server you didn't enter it for.</li>
+            <li>Defaults can also be set in <code>src/main/resources/ai.properties</code> or with
+              <code>TM_AI_BASE_URL</code> / <code>TM_AI_API_KEY</code> / <code>TM_AI_MODEL</code>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/settings.js"></script>
+</body>
+</html>

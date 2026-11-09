@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelMate — Your Entire Journey, Planned by AI</title>
+  <meta name="description" content="Discover places, compare travel options, plan every day and manage your complete trip in one place. Powered by TravelMate.">
+  
+  <!-- Bootstrap 5 CSS & Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- TravelMate Master Design System -->
+  <link rel="stylesheet" href="css/travelmate.css">
+</head>
+<body>
+
+  <!-- ================= GLOBAL NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg tm-navbar">
+    <div class="container-xl">
+      <a class="tm-brand" href="index.html" id="nav-brand-logo">
+        <div class="tm-brand-logo">
+          <i class="bi bi-compass"></i>
+        </div>
+        <span>TravelMate</span>
+        
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#tmNavbarMain" aria-controls="tmNavbarMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="tmNavbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link active" href="index.html" id="nav-home">
+              <i class="bi bi-house-door"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="explore.html" id="nav-explore">
+              <i class="bi bi-compass"></i> Explore
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="plan.html" id="nav-plan">
+              <i class="bi bi-magic"></i> Plan a Trip
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="workspace.html" id="nav-workspace">
+              <i class="bi bi-map"></i> Itinerary
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="trips.html" id="nav-trips">
+              <i class="bi bi-journal-bookmark"></i> My Trips
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="about.html" id="nav-about">
+              <i class="bi bi-info-circle"></i> About
+            </a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a href="auth.html" class="tm-btn tm-btn-outline tm-btn-sm" id="nav-signin-btn">
+            <i class="bi bi-person"></i> Sign In
+          </a>
+          <a href="plan.html" class="tm-btn tm-btn-accent tm-btn-sm" id="nav-plan-cta-btn">
+            <i class="bi bi-send-fill"></i> Plan My Trip
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="tm-hero">
+    <div class="container-xl">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="d-inline-flex align-items-center gap-2 px-3 py-1 mb-3 rounded-pill" style="background: var(--tm-primary-subtle); color: var(--tm-primary); font-size: 0.85rem; font-weight: 700;">
+            <i class="bi bi-stars text-warning"></i> AI-Powered Travel Intelligence
+          </div>
+          <h1 class="tm-hero-title">Your Entire Journey, Planned by AI.</h1>
+          <p class="tm-hero-subtitle">
+            Discover destinations, compare trains, buses and flights, generate day-wise itineraries with maps, and budget every rupee — all in one unified workspace.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3 align-items-center mb-4">
+            <div class="d-flex align-items-center gap-2 text-muted small">
+              <i class="bi bi-check-circle-fill text-success"></i> Smart Day-wise Timelines
+            </div>
+            <div class="d-flex align-items-center gap-2 text-muted small">
+              <i class="bi bi-check-circle-fill text-success"></i> Synchronized Map Routing
+            </div>
+            <div class="d-flex align-items-center gap-2 text-muted small">
+              <i class="bi bi-check-circle-fill text-success"></i> Weather-Aware Alternatives
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <!-- Interactive Quick Planning Box -->
+          <div class="tm-search-box">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold m-0 text-dark d-flex align-items-center gap-2">
+                <i class="bi bi-sliders2 text-primary"></i> Start Your Trip Plan
+              </h5>
+              <span class="tm-badge tm-badge-demo">Demo Ready</span>
+            </div>
+
+            <form id="hero-quick-plan-form" onsubmit="handleHeroQuickPlan(event)">
+              <div class="row g-2 mb-2">
+                <div class="col-md-6">
+                  <div class="p-2 border rounded-3 bg-light">
+                    <label class="tm-search-label" for="hero-from"><i class="bi bi-geo-alt"></i> FROM (ORIGIN)</label>
+                    <input type="text" class="tm-search-input" id="hero-from" placeholder="e.g. Bengaluru" value="Bengaluru" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-2 border rounded-3 bg-light">
+                    <label class="tm-search-label" for="hero-to"><i class="bi bi-geo"></i> TO (DESTINATION)</label>
+                    <input type="text" class="tm-search-input" id="hero-to" placeholder="e.g. Mysuru" value="Mysuru" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row g-2 mb-2">
+                <div class="col-md-6">
+                  <div class="p-2 border rounded-3 bg-light">
+                    <label class="tm-search-label" for="hero-date"><i class="bi bi-calendar3"></i> DEPARTURE DATE</label>
+                    <input type="date" class="tm-search-input" id="hero-date" value="2026-11-14" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-2 border rounded-3 bg-light">
+                    <label class="tm-search-label" for="hero-days"><i class="bi bi-clock-history"></i> DURATION (DAYS)</label>
+                    <select class="tm-search-input form-select form-select-sm border-0 p-0" id="hero-days">
+                      <option value="2">2 Days (Weekend Escape)</option>
+                      <option value="3" selected>3 Days (Recommended)</option>
+                      <option value="4">4 Days (Extended Trail)</option>
+                      <option value="5">5 Days (Grand Tour)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row g-2 mb-3">
+                <div class="col-md-6">
+                  <div class="p-2 border rounded-3 bg-light">
+                    <label class="tm-search-label" for="hero-travelers"><i class="bi bi-people"></i> TRAVELERS</label>
+                    <select class="tm-search-input form-select form-select-sm border-0 p-0" id="hero-travelers">
+                      <option value="1">Solo Traveler (1)</option>
+                      <option value="2" selected>Couple / Pair (2)</option>
+                      <option value="4">Family / Friends (4)</option>
+                      <option value="6">Group (6+)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="p-2 border rounded-3 bg-light">
+                    <label class="tm-search-label" for="hero-budget"><i class="bi bi-cash-stack"></i> BUDGET TIER</label>
+                    <select class="tm-search-input form-select form-select-sm border-0 p-0" id="hero-budget">
+                      <option value="budget">Backpacker / Budget (~₹8,000)</option>
+                      <option value="moderate" selected>Moderate (~₹18,000)</option>
+                      <option value="luxury">Luxury / Premium (~₹35,000)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="tm-btn tm-btn-accent w-100 py-3 fs-6" id="hero-plan-submit-btn">
+                <i class="bi bi-magic"></i> Plan My Trip With AI
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= POPULAR DESTINATIONS ================= -->
+  <section class="py-5 bg-white">
+    <div class="container-xl">
+      <div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
+        <div>
+          <span class="tm-badge tm-badge-primary mb-2">Trending Places</span>
+          <h2 class="fw-bold mb-1">Popular Destinations</h2>
+          <p class="text-muted m-0">Handpicked Indian travel hubs with curated day-by-day itineraries.</p>
+        </div>
+        <a href="explore.html" class="tm-btn tm-btn-outline-primary tm-btn-sm">
+          Explore All Destinations <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="row g-4" id="home-destinations-grid">
+        <!-- Rendered via JS from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW TRAVELMATE WORKS ================= -->
+  <section class="py-5" style="background: var(--tm-bg);">
+    <div class="container-xl">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="tm-badge tm-badge-accent mb-2">Simplicity First</span>
+        <h2 class="fw-bold">How TravelMate Works</h2>
+        <p class="text-muted">Turn vague travel ideas into an organized, map-connected itinerary in three effortless steps.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="tm-card p-4 text-center h-100 tm-card-hover-elevate">
+            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px; background: var(--tm-primary-subtle); color: var(--tm-primary); font-size: 1.6rem;">
+              <i class="bi bi-input-cursor-text"></i>
+            </div>
+            <h5 class="fw-bold mb-2">1. Enter Trip Details</h5>
+            <p class="text-muted small">
+              Specify your starting city, destination, dates, traveler count, budget and personal interests like heritage, food, or nature.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="tm-card p-4 text-center h-100 tm-card-hover-elevate">
+            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px; background: var(--tm-accent-light); color: var(--tm-accent); font-size: 1.6rem;">
+              <i class="bi bi-cpu"></i>
+            </div>
+            <h5 class="fw-bold mb-2">2. Let AI Create Itinerary</h5>
+            <p class="text-muted small">
+              Our intelligent engine schedules visits chronologically, factors in local transit times, recommends meal stops, and checks weather forecasts.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="tm-card p-4 text-center h-100 tm-card-hover-elevate">
+            <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 64px; height: 64px; background: var(--tm-teal-light); color: var(--tm-teal); font-size: 1.6rem;">
+              <i class="bi bi-map"></i>
+            </div>
+            <h5 class="fw-bold mb-2">3. Customize & Manage</h5>
+            <p class="text-muted small">
+              Fine-tune stops in the Wanderlog-inspired split workspace with interactive maps, compare transport options, track expenses, and export.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURE HIGHLIGHTS ================= -->
+  <section class="py-5 bg-white">
+    <div class="container-xl">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5">
+          <span class="tm-badge tm-badge-primary mb-2">Comprehensive Platform</span>
+          <h2 class="fw-bold mb-3">Everything You Need For Your Trip, Unified.</h2>
+          <p class="text-muted mb-4">
+            No more jumping between 10 different tabs for trains, hotels, maps, and Excel spreadsheets. TravelMate keeps your complete journey coherent and organized.
+          </p>
+
+          <div class="d-flex flex-column gap-3">
+            <div class="d-flex align-items-start gap-3">
+              <div class="p-2 rounded-3 bg-light text-primary fs-5"><i class="bi bi-calendar2-range"></i></div>
+              <div>
+                <h6 class="fw-bold mb-1">AI Day-Wise Itinerary</h6>
+                <p class="small text-muted m-0">Balanced morning, afternoon and evening plans with realistic transit times between stops.</p>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-start gap-3">
+              <div class="p-2 rounded-3 bg-light text-primary fs-5"><i class="bi bi-signpost-split"></i></div>
+              <div>
+                <h6 class="fw-bold mb-1">Multimodal Transport Comparison</h6>
+                <p class="small text-muted m-0">Compare Indian Railways trains, KSRTC Volvo buses, flights, and self-drive cabs side by side.</p>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-start gap-3">
+              <div class="p-2 rounded-3 bg-light text-primary fs-5"><i class="bi bi-cloud-sun"></i></div>
+              <div>
+                <h6 class="fw-bold mb-1">Weather-Aware Alternative Engine</h6>
+                <p class="small text-muted m-0">Get proactive indoor activity proposals whenever rain is predicted to disrupt outdoor visits.</p>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-start gap-3">
+              <div class="p-2 rounded-3 bg-light text-primary fs-5"><i class="bi bi-wallet2"></i></div>
+              <div>
+                <h6 class="fw-bold mb-1">Live Expense & Budget Tracker</h6>
+                <p class="small text-muted m-0">Prevent overspending with automated category breakdowns and cost-per-traveler tracking.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <!-- Interactive Workspace Feature Teaser Card -->
+          <div class="tm-card p-4 shadow-lg border-2">
+            <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+              <div>
+                <span class="badge bg-primary text-white mb-1">Live Demo Preview</span>
+                <h5 class="fw-bold m-0 text-dark">Mysuru Royal Heritage & Nature Trails</h5>
+                <small class="text-muted">3 Days • 2 Travelers • Nov 14 – Nov 16, 2026</small>
+              </div>
+              <a href="workspace.html" class="tm-btn tm-btn-accent tm-btn-sm">
+                Open Full Workspace <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- Mini Itinerary Timeline Sample -->
+            <div class="timeline-preview p-2">
+              <div class="d-flex align-items-center gap-3 p-2 mb-2 rounded bg-light border-start border-4 border-primary">
+                <span class="badge bg-secondary">09:30 AM</span>
+                <div class="flex-grow-1">
+                  <div class="fw-semibold small">Mysore Palace (Amba Vilas)</div>
+                  <small class="text-muted">Heritage • 2.5 hrs • Entry ₹100</small>
+                </div>
+                <span class="badge bg-success-subtle text-success">Stop 1</span>
+              </div>
+
+              <div class="d-flex align-items-center gap-3 p-2 mb-2 rounded bg-light border-start border-4 border-warning">
+                <span class="badge bg-secondary">12:45 PM</span>
+                <div class="flex-grow-1">
+                  <div class="fw-semibold small">Lunch at Mylari Hotel (Old Heritage)</div>
+                  <small class="text-muted">Food Break • Famous Mysore Dosa • ~₹250</small>
+                </div>
+                <span class="badge bg-warning-subtle text-warning">Stop 2</span>
+              </div>
+
+              <div class="d-flex align-items-center gap-3 p-2 rounded bg-light border-start border-4 border-info">
+                <span class="badge bg-secondary">02:15 PM</span>
+                <div class="flex-grow-1">
+                  <div class="fw-semibold small">Devaraja Market Heritage Walk</div>
+                  <small class="text-muted">Culture & Shopping • 1.5 hrs</small>
+                </div>
+                <span class="badge bg-info-subtle text-info">Stop 3</span>
+              </div>
+            </div>
+
+            <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center">
+              <span class="small text-muted"><i class="bi bi-geo-alt-fill text-danger"></i> Interactive OpenStreetMap Connected</span>
+              <a href="workspace.html" class="small fw-bold text-primary">Interactive Map & Day Tabs &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CALL TO ACTION ================= -->
+  <section class="py-5" style="background: linear-gradient(135deg, var(--tm-primary-dark) 0%, var(--tm-primary) 100%); color: #fff;">
+    <div class="container-xl text-center py-4">
+      <h2 class="display-6 fw-bold mb-3">Ready to Craft Your Next Unforgettable Journey?</h2>
+      <p class="lead text-light opacity-75 mb-4 mx-auto" style="max-width: 600px;">
+        Join travelers planning their college escapes, family vacations, and weekend road trips with TravelMate.
+      </p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="plan.html" class="tm-btn tm-btn-accent tm-btn-lg">
+          <i class="bi bi-magic"></i> Plan My Trip Now
+        </a>
+        <a href="explore.html" class="tm-btn tm-btn-outline tm-btn-lg text-white border-white">
+          <i class="bi bi-compass"></i> Explore Destinations
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="tm-footer">
+    <div class="container-xl">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="tm-brand text-white mb-3">
+            <div class="tm-brand-logo">
+              <i class="bi bi-compass"></i>
+            </div>
+            <span>TravelMate</span>
+          </div>
+          <p class="small text-light opacity-75 mb-3">
+            Every Journey, Thoughtfully Planned. An intelligent end-to-end trip planning suite built as a Semester 3 CSE project.
+          </p>
+          <div class="d-flex gap-2 text-white-50 small">
+            <span>Frontend: HTML5, CSS3, JS, Bootstrap 5</span> • 
+            <span>Maven WAR Structure</span>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <h6 class="tm-footer-title">Navigation</h6>
+          <ul class="list-unstyled small d-flex flex-column gap-2 m-0">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="explore.html">Explore</a></li>
+            <li><a href="plan.html">Plan a Trip</a></li>
+            <li><a href="workspace.html">Itinerary Workspace</a></li>
+            <li><a href="trips.html">My Trips</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-2">
+          <h6 class="tm-footer-title">Trip Modules</h6>
+          <ul class="list-unstyled small d-flex flex-column gap-2 m-0">
+            <li><a href="transport.html">Transport Comparison</a></li>
+            <li><a href="hotels.html">Hotels & Stays</a></li>
+            <li><a href="food.html">Food & Restaurants</a></li>
+            <li><a href="budget.html">Budget & Expenses</a></li>
+            <li><a href="weather.html">Weather Alternatives</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4">
+          <h6 class="tm-footer-title">Project Info</h6>
+          <p class="small text-light opacity-75 mb-2">
+            <strong>Architecture:</strong> Java Servlets (Tomcat 10+), JDBC & MySQL database persistence.
+          </p>
+          <p class="small text-light opacity-75 mb-3">
+            Displayed prices and availability are indicative estimates. Please confirm final details with the relevant booking provider.
+          </p>
+          <a href="about.html" class="tm-btn tm-btn-outline tm-btn-sm text-white border-secondary">
+            Read System Architecture &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div class="tm-footer-bottom d-flex flex-wrap justify-content-between align-items-center">
+        <div>&copy; 2026 TravelMate. Developed for Semester 3 CSE Project.</div>
+        <div class="d-flex gap-3">
+          <a href="about.html">Architecture Docs</a>
+          <a href="about.html#faq">FAQ</a>
+          <a href="auth.html">Account UI</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Render popular destinations on homepage
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("home-destinations-grid");
+      if (!container || !window.TRAVELMATE_DATA) return;
+
+      const items = window.TRAVELMATE_DATA.destinations.slice(0, 6);
+      container.innerHTML = items.map(dest => `
+        <div class="col-md-6 col-lg-4">
+          <div class="tm-card tm-dest-card tm-card-hover-elevate">
+            <div class="tm-dest-image-wrap">
+              <img src="${dest.image}" class="tm-dest-image" alt="${dest.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80'">
+              <span class="tm-badge tm-badge-primary tm-dest-badge-float">${dest.category}</span>
+            </div>
+            <div class="p-3 d-flex flex-column flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start mb-1">
+                <h5 class="fw-bold m-0 text-dark">${dest.name}</h5>
+                <small class="text-muted fw-semibold">${dest.state}</small>
+              </div>
+              <p class="small text-muted mb-3 flex-grow-1">${dest.description.substring(0, 95)}...</p>
+              <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-auto">
+                <div>
+                  <small class="text-muted d-block" style="font-size:0.75rem">SUGGESTED</small>
+                  <span class="small fw-bold text-dark">${dest.suggestedDays} Days</span>
+                </div>
+                <div class="d-flex gap-2">
+                  <a href="explore.html?dest=${dest.id}" class="tm-btn tm-btn-outline tm-btn-sm">Explore</a>
+                  <a href="plan.html?dest=${dest.name}" class="tm-btn tm-btn-primary tm-btn-sm">Plan</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    });
+
+    // Handle Quick Plan submission from hero form
+    function handleHeroQuickPlan(event) {
+      event.preventDefault();
+      const origin = document.getElementById("hero-from").value.trim();
+      const dest = document.getElementById("hero-to").value.trim();
+      const date = document.getElementById("hero-date").value;
+      const days = document.getElementById("hero-days").value;
+      const travelers = document.getElementById("hero-travelers").value;
+      const budget = document.getElementById("hero-budget").value;
+
+      // Pass query parameters to plan.html for comprehensive customization
+      const queryParams = new URLSearchParams({
+        origin: origin,
+        dest: dest,
+        date: date,
+        days: days,
+        travelers: travelers,
+        budget: budget
+      });
+
+      window.location.href = `plan.html?${queryParams.toString()}`;
+    }
+  </script>
+</body>
+</html>

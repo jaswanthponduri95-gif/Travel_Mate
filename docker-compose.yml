@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # MySQL 8 Database Service
+  mysql:
+    image: mysql:8.0
+    container_name: travelmate-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: travelmate_root_password
+      MYSQL_DATABASE: tripmate
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ptravelmate_root_password"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  # TravelMate Web Application (Tomcat 10.1 + Java 17)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: travelmate-app
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      TM_DB_URL: "jdbc:mysql://mysql:3306/tripmate?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8"
+      TM_DB_USER: "root"
+      TM_DB_PASSWORD: "travelmate_root_password"
+      TM_AI_ENABLED: "${TM_AI_ENABLED:-false}"
+      TM_AI_BASE_URL: "${TM_AI_BASE_URL:-https://generativelanguage.googleapis.com/v1beta/openai}"
+      TM_AI_MODEL: "${TM_AI_MODEL:-gemini-2.5-flash}"
+      TM_AI_API_KEY: "${TM_AI_API_KEY:-}"
+      TM_AI_ALLOWED_EMAILS: "${TM_AI_ALLOWED_EMAILS:-admin@example.com}"
+      TM_GEO_URL: "${TM_GEO_URL:-https://nominatim.openstreetmap.org}"
+      TM_WEATHER_URL: "${TM_WEATHER_URL:-https://api.open-meteo.com/v1/forecast}"
+      PORT: "8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
+

@@ -1,0 +1,12 @@
+# Maven build output
+target/
+# Local development databases and credentials
+data/
+.env
+.env.*
+# IDE / OS files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db

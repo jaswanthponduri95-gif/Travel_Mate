@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan a Trip — TravelMate AI Configurator</title>
+  <meta name="description" content="Configure your journey details, budget, travel pace, and interests to generate a customized smart itinerary.">
+  
+  <!-- Bootstrap 5 CSS & Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- TravelMate Master Design System -->
+  <link rel="stylesheet" href="css/travelmate.css">
+</head>
+<body>
+
+  <!-- ================= GLOBAL NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg tm-navbar">
+    <div class="container-xl">
+      <a class="tm-brand" href="index.html">
+        <div class="tm-brand-logo"><i class="bi bi-compass"></i></div>
+        <span>TravelMate</span>
+        
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#tmNavbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="tmNavbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="explore.html"><i class="bi bi-compass"></i> Explore</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link active" href="plan.html"><i class="bi bi-magic"></i> Plan a Trip</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="workspace.html"><i class="bi bi-map"></i> Itinerary</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="trips.html"><i class="bi bi-journal-bookmark"></i> My Trips</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="about.html"><i class="bi bi-info-circle"></i> About</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a href="auth.html" class="tm-btn tm-btn-outline tm-btn-sm"><i class="bi bi-person"></i> Sign In</a>
+          <a href="workspace.html" class="tm-btn tm-btn-outline-primary tm-btn-sm"><i class="bi bi-eye"></i> View Current Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= SUBHEADER / BREADCRUMB ================= -->
+  <div class="bg-white border-bottom py-3">
+    <div class="container-xl d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-1 small">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Plan a Trip</li>
+          </ol>
+        </nav>
+        <h3 class="fw-bold m-0 text-dark">Trip Configurator</h3>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <span class="tm-badge tm-badge-demo">Demo Mode</span>
+        <button type="button" class="tm-btn tm-btn-outline tm-btn-sm" onclick="handleClearPlanForm()">
+          <i class="bi bi-arrow-counterclockwise"></i> Reset Form
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN CONFIGURATION WORKSPACE ================= -->
+  <div class="container-xl py-4">
+    <div class="row g-4">
+      
+      <!-- FORM COLUMN (LEFT) -->
+      <div class="col-lg-8">
+        <form id="trip-planner-form" onsubmit="handleGenerateItinerary(event)" class="d-flex flex-column gap-4">
+          
+          <!-- SECTION A: JOURNEY DETAILS -->
+          <div class="tm-card p-4">
+            <div class="d-flex align-items-center gap-2 border-bottom pb-3 mb-3">
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: 700;">A</div>
+              <div>
+                <h5 class="fw-bold m-0">Journey Fundamentals</h5>
+                <small class="text-muted">Origin, destination, dates, and party size</small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="plan-origin" class="tm-form-label">
+                  Starting City / Origin <span class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border-end-0"><i class="bi bi-geo-alt text-muted"></i></span>
+                  <input type="text" class="form-control tm-form-control border-start-0" id="plan-origin" value="Bengaluru" required placeholder="e.g. Bengaluru, Mumbai">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="plan-dest" class="tm-form-label">
+                  Destination <span class="required">*</span>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border-end-0"><i class="bi bi-geo text-muted"></i></span>
+                  <input type="text" class="form-control tm-form-control border-start-0" id="plan-dest" value="Mysuru" required placeholder="e.g. Mysuru, Ooty, Jaipur">
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="plan-date" class="tm-form-label">
+                  Departure Date <span class="required">*</span>
+                </label>
+                <input type="date" class="form-control tm-form-control" id="plan-date" value="2026-11-14" required>
+              </div>
+
+              <div class="col-md-4">
+                <label for="plan-days" class="tm-form-label">
+                  Total Trip Days <span class="required">*</span>
+                </label>
+                <select class="form-select tm-form-control" id="plan-days" required>
+                  <option value="1">1 Day (Express Visit)</option>
+                  <option value="2">2 Days (Weekend Getaway)</option>
+                  <option value="3" selected>3 Days (Ideal Leisure)</option>
+                  <option value="4">4 Days (Deep Discovery)</option>
+                  <option value="5">5 Days (Grand Vacation)</option>
+                </select>
+              </div>
+
+              <div class="col-md-4">
+                <label for="plan-travelers" class="tm-form-label">
+                  Travelers <span class="required">*</span>
+                </label>
+                <select class="form-select tm-form-control" id="plan-travelers" required>
+                  <option value="1">1 (Solo Traveler)</option>
+                  <option value="2" selected>2 (Couple / Pair)</option>
+                  <option value="3">3 (Small Group)</option>
+                  <option value="4">4 (Family / Friends)</option>
+                  <option value="6">6+ (Large Group)</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="tm-form-label">Return Transit Preference</label>
+                <div class="d-flex flex-wrap gap-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="returnPref" id="ret-roundtrip" checked>
+                    <label class="form-check-label small" for="ret-roundtrip">Round-Trip to Origin</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="returnPref" id="ret-oneway">
+                    <label class="form-check-label small" for="ret-oneway">One-Way Only</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="returnPref" id="ret-openjaw">
+                    <label class="form-check-label small" for="ret-openjaw">Return to Different City</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION B: BUDGET CONFIGURATION -->
+          <div class="tm-card p-4">
+            <div class="d-flex align-items-center gap-2 border-bottom pb-3 mb-3">
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: 700;">B</div>
+              <div>
+                <h5 class="fw-bold m-0">Budget & Spending Preference</h5>
+                <small class="text-muted">Target spend per person or total estimate</small>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-4">
+                <label class="tm-card p-3 d-block cursor-pointer h-100 border text-center">
+                  <input type="radio" name="budgetCategory" value="budget" class="form-check-input mb-2">
+                  <div class="fw-bold text-dark">Budget / Backpacker</div>
+                  <small class="text-muted d-block">Hostels, trains, local buses</small>
+                  <span class="badge bg-light text-secondary mt-2">~₹8,000 total</span>
+                </label>
+              </div>
+
+              <div class="col-md-4">
+                <label class="tm-card p-3 d-block cursor-pointer h-100 border border-primary text-center bg-primary-subtle">
+                  <input type="radio" name="budgetCategory" value="moderate" class="form-check-input mb-2" checked>
+                  <div class="fw-bold text-primary">Moderate / Value</div>
+                  <small class="text-muted d-block">Boutique stays, cabs, top dining</small>
+                  <span class="badge bg-primary text-white mt-2">~₹18,000 total</span>
+                </label>
+              </div>
+
+              <div class="col-md-4">
+                <label class="tm-card p-3 d-block cursor-pointer h-100 border text-center">
+                  <input type="radio" name="budgetCategory" value="luxury" class="form-check-input mb-2">
+                  <div class="fw-bold text-dark">Luxury / Heritage</div>
+                  <small class="text-muted d-block">5-star resorts, flights, chauffeur</small>
+                  <span class="badge bg-light text-secondary mt-2">~₹35,000 total</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="plan-budget-amount" class="tm-form-label">
+                  Custom Total Budget Target (INR ₹)
+                </label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light fw-bold">₹</span>
+                  <input type="number" class="form-control tm-form-control" id="plan-budget-amount" value="18000" min="2000" step="500">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="tm-form-label">Includes In Estimations</label>
+                <div class="small text-muted pt-2">
+                  <i class="bi bi-check2 text-success"></i> Transport &bull; <i class="bi bi-check2 text-success"></i> Hotels &bull; <i class="bi bi-check2 text-success"></i> Meals &bull; <i class="bi bi-check2 text-success"></i> Sightseeing
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION C: TRAVEL INTERESTS -->
+          <div class="tm-card p-4">
+            <div class="d-flex align-items-center gap-2 border-bottom pb-3 mb-3">
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: 700;">C</div>
+              <div>
+                <h5 class="fw-bold m-0">Interests & Activities</h5>
+                <small class="text-muted">Select all topics you wish to explore (Multi-select)</small>
+              </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2" id="interests-chips-container">
+              <div class="tm-chip tm-interest-chip active" data-value="Heritage">
+                <input type="checkbox" checked hidden>
+                <i class="bi bi-bank"></i> Heritage & History
+              </div>
+              <div class="tm-chip tm-interest-chip active" data-value="Food">
+                <input type="checkbox" checked hidden>
+                <i class="bi bi-cup-hot"></i> Food & Royal Cuisine
+              </div>
+              <div class="tm-chip tm-interest-chip active" data-value="Nature">
+                <input type="checkbox" checked hidden>
+                <i class="bi bi-tree"></i> Nature & Gardens
+              </div>
+              <div class="tm-chip tm-interest-chip active" data-value="Photography">
+                <input type="checkbox" checked hidden>
+                <i class="bi bi-camera"></i> Photography Spots
+              </div>
+              <div class="tm-chip tm-interest-chip" data-value="Temples">
+                <input type="checkbox" hidden>
+                <i class="bi bi-flower1"></i> Temples & Culture
+              </div>
+              <div class="tm-chip tm-interest-chip" data-value="Shopping">
+                <input type="checkbox" hidden>
+                <i class="bi bi-bag"></i> Silk & Handicraft Shopping
+              </div>
+              <div class="tm-chip tm-interest-chip" data-value="Adventure">
+                <input type="checkbox" hidden>
+                <i class="bi bi-compass"></i> Adventure & Trekking
+              </div>
+              <div class="tm-chip tm-interest-chip" data-value="Relaxation">
+                <input type="checkbox" hidden>
+                <i class="bi bi-emoji-smile"></i> Relaxation & Spa
+              </div>
+              <div class="tm-chip tm-interest-chip" data-value="Family">
+                <input type="checkbox" hidden>
+                <i class="bi bi-people"></i> Family-Friendly
+              </div>
+              <div class="tm-chip tm-interest-chip" data-value="Nightlife">
+                <input type="checkbox" hidden>
+                <i class="bi bi-moon-stars"></i> Evening Lights & Nightlife
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION D: TRAVEL PACE & PREFERENCES -->
+          <div class="tm-card p-4">
+            <div class="d-flex align-items-center gap-2 border-bottom pb-3 mb-3">
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: 700;">D</div>
+              <div>
+                <h5 class="fw-bold m-0">Travel Pace & Preferences</h5>
+                <small class="text-muted">Customize the daily schedule tempo and comfort</small>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="plan-pace" class="tm-form-label">Daily Itinerary Pace</label>
+                <select class="form-select tm-form-control" id="plan-pace">
+                  <option value="Relaxed">Relaxed (1–2 stops per day, long breaks)</option>
+                  <option value="Balanced" selected>Balanced (3–4 stops per day, steady rhythm)</option>
+                  <option value="Packed">Packed / Fast (5+ stops, maximize attractions)</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label for="plan-accommodation" class="tm-form-label">Preferred Stay Type</label>
+                <select class="form-select tm-form-control" id="plan-accommodation">
+                  <option value="Heritage Hotel" selected>Heritage Hotel / Haveli</option>
+                  <option value="Boutique Stay">Boutique Modern Hotel</option>
+                  <option value="Resort">Nature / Hill Resort</option>
+                  <option value="Homestay">Authentic Local Homestay</option>
+                  <option value="Budget Inn">Budget Inn / Hostel</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label for="plan-dietary" class="tm-form-label">Dietary Preferences</label>
+                <select class="form-select tm-form-control" id="plan-dietary">
+                  <option value="All" selected>No Restrictions (Open to all cuisine)</option>
+                  <option value="Pure Veg">Pure Vegetarian Only</option>
+                  <option value="South Indian">Traditional South Indian Specialty</option>
+                  <option value="Halal">Halal Certified Options</option>
+                  <option value="Vegan">Vegan Friendly</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label for="plan-transport-mode" class="tm-form-label">Preferred Intercity Transit</label>
+                <select class="form-select tm-form-control" id="plan-transport-mode">
+                  <option value="Train" selected>Express Train (Vande Bharat / Shatabdi)</option>
+                  <option value="Bus">Premium Volvo Bus (KSRTC Airavat)</option>
+                  <option value="Cab">Chauffeur Driven Cab</option>
+                  <option value="Flight">Flight (where available)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACTIONS BAR -->
+          <div class="d-flex justify-content-between align-items-center p-3 bg-white rounded-3 border shadow-sm">
+            <button type="button" class="tm-btn tm-btn-outline" onclick="handleClearPlanForm()">
+              <i class="bi bi-trash3"></i> Clear Form
+            </button>
+            <button type="submit" class="tm-btn tm-btn-accent tm-btn-lg" id="generate-itinerary-btn">
+              <i class="bi bi-magic"></i> Generate My Itinerary With AI
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- SUMMARY COLUMN (RIGHT) -->
+      <div class="col-lg-4">
+        <div class="position-sticky" style="top: 90px;">
+          <div class="tm-card p-4 border-2">
+            <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+              <h5 class="fw-bold m-0 text-dark">Live Trip Summary</h5>
+              <span class="tm-badge tm-badge-primary">Real-Time</span>
+            </div>
+
+            <div class="mb-3">
+              <span class="text-muted small d-block">DESTINATION</span>
+              <h4 class="fw-bold text-primary m-0" id="summary-destination">Mysuru</h4>
+              <small class="text-muted" id="summary-route">Bengaluru ➔ Mysuru</small>
+            </div>
+
+            <div class="row g-2 py-2 border-top border-bottom my-3">
+              <div class="col-6">
+                <span class="text-muted small d-block">START DATE</span>
+                <span class="fw-bold text-dark small" id="summary-dates">Nov 14, 2026</span>
+              </div>
+              <div class="col-6">
+                <span class="text-muted small d-block">DURATION</span>
+                <span class="fw-bold text-dark small" id="summary-duration">3 Days</span>
+              </div>
+              <div class="col-6">
+                <span class="text-muted small d-block">PARTY SIZE</span>
+                <span class="fw-bold text-dark small" id="summary-travelers">2 Travelers</span>
+              </div>
+              <div class="col-6">
+                <span class="text-muted small d-block">DAILY PACE</span>
+                <span class="fw-bold text-dark small" id="summary-pace">Balanced</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <span class="text-muted small d-block">ESTIMATED TOTAL BUDGET</span>
+              <div class="fw-bold text-success fs-5" id="summary-budget">₹18,000 Total (₹9,000/person)</div>
+              <small class="text-muted">Includes lodging, travel tickets, dining & passes</small>
+            </div>
+
+            <div class="mb-3">
+              <span class="text-muted small d-block mb-1">SELECTED INTERESTS</span>
+              <div id="summary-interests" class="d-flex flex-wrap">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <div class="p-3 bg-light rounded-3 border small text-muted">
+              <i class="bi bi-info-circle-fill text-primary"></i> 
+              Generating builds a multi-day timeline synchronized with an interactive map, transport breakdown and expense ledger.
+            </div>
+
+            <div class="mt-3">
+              <button type="button" class="tm-btn tm-btn-accent w-100 py-3" onclick="document.getElementById('generate-itinerary-btn').click()">
+                <i class="bi bi-magic"></i> Generate Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= AI GENERATING MODAL ================= -->
+  <div class="modal fade" id="aiGeneratingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content tm-modal-content text-center p-4">
+        <div class="my-3">
+          <div class="spinner-border text-primary" style="width: 3.5rem; height: 3.5rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <h4 class="fw-bold text-dark mb-2">Generating Your TravelMate Itinerary</h4>
+        <p class="text-muted small mb-4" id="ai-gen-step-text">Initializing AI travel planner engine...</p>
+
+        <div class="progress mb-3" style="height: 10px;">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" id="ai-gen-progress-bar" role="progressbar" style="width: 15%"></div>
+        </div>
+
+        <small class="text-muted" id="ai-gen-footnote">Preparing timeline workspace</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/plan.js"></script>
+</body>
+</html>

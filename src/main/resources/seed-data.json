@@ -1,0 +1,446 @@
+{
+  "activeTrip": {
+    "id": "trip-mysuru-2026",
+    "title": "Mysuru Royal Heritage & Nature Trails",
+    "destination": "Mysuru",
+    "origin": "Bengaluru",
+    "startDate": "2026-11-14",
+    "endDate": "2026-11-16",
+    "daysCount": 3,
+    "travelers": 2,
+    "budgetTotal": 18000,
+    "budgetCategory": "Moderate",
+    "interests": [
+      "Heritage",
+      "Food",
+      "Nature",
+      "Photography"
+    ],
+    "coverImage": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80",
+    "accommodation": {
+      "name": "Grand Mercure Mysuru",
+      "type": "Premium Hotel",
+      "address": "New Sayyaji Rao Road, Bamboo Bazar, Mysuru",
+      "pricePerNight": 4200,
+      "nights": 2
+    },
+    "days": [
+      {
+        "dayNumber": 1,
+        "title": "Royal Palaces, Grand Bazaars & Evening Illumination",
+        "date": "2026-11-14",
+        "summary": "3 stops • 4.5 hrs planned • ~14 km local transit • ₹1,250 est. spend",
+        "stops": [
+          {
+            "id": "stop-101",
+            "name": "Mysore Palace (Amba Vilas)",
+            "category": "Heritage",
+            "categoryIcon": "bi-bank",
+            "time": "09:30 AM",
+            "duration": "2.5 hrs",
+            "lat": 12.3051,
+            "lng": 76.6551,
+            "cost": 100,
+            "image": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=600&q=80",
+            "notes": "Must see the Durbar Hall and golden royal throne. Photography permitted in outer corridors. Audio guide recommended.",
+            "transitToNext": {
+              "mode": "Auto Rickshaw",
+              "icon": "bi-taxi-front",
+              "duration": "10 mins",
+              "distance": "2.3 km",
+              "cost": 50
+            }
+          },
+          {
+            "id": "stop-102",
+            "name": "Lunch at Mylari Hotel (Old Heritage Branch)",
+            "category": "Food",
+            "categoryIcon": "bi-cup-hot",
+            "time": "12:45 PM",
+            "duration": "1.0 hr",
+            "lat": 12.3115,
+            "lng": 76.662,
+            "cost": 250,
+            "image": "https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&w=600&q=80",
+            "notes": "World famous soft Mylari butter dosas served on plantain leaves with freshly brewed South Indian filter coffee.",
+            "transitToNext": {
+              "mode": "Walk",
+              "icon": "bi-person-walking",
+              "duration": "8 mins",
+              "distance": "600 m",
+              "cost": 0
+            }
+          },
+          {
+            "id": "stop-103",
+            "name": "Devaraja Market Heritage Walk",
+            "category": "Culture",
+            "categoryIcon": "bi-basket",
+            "time": "02:15 PM",
+            "duration": "1.5 hrs",
+            "lat": 12.3102,
+            "lng": 76.6508,
+            "cost": 0,
+            "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80",
+            "notes": "130-year-old vibrant market full of fragrant jasmine garlands, sandalwood oils, and colorful heaps of kumkum powder.",
+            "transitToNext": {
+              "mode": "Cab",
+              "icon": "bi-car-front",
+              "duration": "15 mins",
+              "distance": "3.8 km",
+              "cost": 120
+            }
+          },
+          {
+            "id": "stop-104",
+            "name": "St. Philomena's Cathedral & Evening Palace Lights",
+            "category": "Architecture",
+            "categoryIcon": "bi-building",
+            "time": "04:30 PM",
+            "duration": "2.0 hrs",
+            "lat": 12.321,
+            "lng": 76.6582,
+            "cost": 0,
+            "image": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=600&q=80",
+            "notes": "Neo-Gothic cathedral with twin 175-foot spires. Then return to Palace grounds for the Sunday 7 PM grand lighting.",
+            "transitToNext": null
+          }
+        ]
+      },
+      {
+        "dayNumber": 2,
+        "title": "Sacred Chamundi Hills & Zoo Sanctuary",
+        "date": "2026-11-15",
+        "summary": "3 stops • 5.0 hrs planned • ~22 km local transit • ₹1,600 est. spend",
+        "stops": [
+          {
+            "id": "stop-201",
+            "name": "Sri Chamundeshwari Temple & Nandi Monolith",
+            "category": "Temples",
+            "categoryIcon": "bi-flower1",
+            "time": "08:30 AM",
+            "duration": "2.5 hrs",
+            "lat": 12.2743,
+            "lng": 76.671,
+            "cost": 100,
+            "image": "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=600&q=80",
+            "notes": "Perched 3,489 feet high. Catch panoramic views of the city. Stop at the massive 16-foot carved monolithic Nandi statue.",
+            "transitToNext": {
+              "mode": "Cab",
+              "icon": "bi-car-front",
+              "duration": "25 mins",
+              "distance": "12 km",
+              "cost": 240
+            }
+          },
+          {
+            "id": "stop-202",
+            "name": "Mysuru Zoo (Sri Chamarajendra Zoological Gardens)",
+            "category": "Nature",
+            "categoryIcon": "bi-tree",
+            "time": "11:45 AM",
+            "duration": "2.5 hrs",
+            "lat": 12.3023,
+            "lng": 76.6668,
+            "cost": 200,
+            "image": "https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?auto=format&fit=crop&w=600&q=80",
+            "notes": "One of India's oldest and best-kept zoos, spanning 157 acres with rare aviaries and shaded walking loops.",
+            "transitToNext": {
+              "mode": "Cab",
+              "icon": "bi-car-front",
+              "duration": "35 mins",
+              "distance": "18 km",
+              "cost": 350
+            }
+          },
+          {
+            "id": "stop-203",
+            "name": "Brindavan Gardens (Outdoor Musical Fountains)",
+            "category": "Gardens",
+            "categoryIcon": "bi-water",
+            "time": "03:30 PM",
+            "duration": "2.5 hrs",
+            "lat": 12.4243,
+            "lng": 76.5732,
+            "cost": 100,
+            "image": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80",
+            "notes": "Terraced botanical gardens beside KRS Dam. [WEATHER ALERT: Outdoor rain forecast simulated for this time!]",
+            "isWeatherImpacted": true,
+            "transitToNext": null
+          }
+        ]
+      },
+      {
+        "dayNumber": 3,
+        "title": "Artisanal Silk, Rail Heritage & Return",
+        "date": "2026-11-16",
+        "summary": "3 stops • 4.0 hrs planned • ~10 km local transit • ₹1,100 est. spend",
+        "stops": [
+          {
+            "id": "stop-301",
+            "name": "KSIC Mysore Silk Weaving Factory",
+            "category": "Shopping",
+            "categoryIcon": "bi-bag-heart",
+            "time": "10:00 AM",
+            "duration": "1.5 hrs",
+            "lat": 12.2985,
+            "lng": 76.6432,
+            "cost": 50,
+            "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80",
+            "notes": "Watch pure mulberry silk sarees being woven with certified gold zari threads on heritage looms.",
+            "transitToNext": {
+              "mode": "Auto Rickshaw",
+              "icon": "bi-taxi-front",
+              "duration": "12 mins",
+              "distance": "3.5 km",
+              "cost": 60
+            }
+          },
+          {
+            "id": "stop-302",
+            "name": "Mysuru Rail Museum & Vintage Saloons",
+            "category": "Heritage",
+            "categoryIcon": "bi-train-front",
+            "time": "12:00 PM",
+            "duration": "1.5 hrs",
+            "lat": 12.3168,
+            "lng": 76.6445,
+            "cost": 50,
+            "image": "https://images.unsplash.com/photo-1515165562839-978bbcf18277?auto=format&fit=crop&w=600&q=80",
+            "notes": "Second museum of its kind in India after New Delhi. Houses the Maharani's personal royal dining carriage.",
+            "transitToNext": {
+              "mode": "Auto Rickshaw",
+              "icon": "bi-taxi-front",
+              "duration": "10 mins",
+              "distance": "2.1 km",
+              "cost": 50
+            }
+          },
+          {
+            "id": "stop-303",
+            "name": "Guru Sweets — Authentic Mysore Pak Tasting",
+            "category": "Food",
+            "categoryIcon": "bi-cup-hot",
+            "time": "02:00 PM",
+            "duration": "45 mins",
+            "lat": 12.3108,
+            "lng": 76.6521,
+            "cost": 200,
+            "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=600&q=80",
+            "notes": "Owned by descendants of Kakasura Madappa, the royal chef who invented Mysore Pak for the Maharaja in 1935.",
+            "transitToNext": null
+          }
+        ]
+      }
+    ],
+    "status": "Upcoming"
+  },
+  "tripsList": [
+    {
+      "id": "trip-mysuru-2026",
+      "title": "Mysuru Royal Heritage & Nature Trails",
+      "destination": "Mysuru, Karnataka",
+      "dates": "Nov 14 – Nov 16, 2026",
+      "duration": "3 Days, 2 Nights",
+      "travelers": 2,
+      "budget": 18000,
+      "image": "https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=700&q=80",
+      "status": "Upcoming",
+      "badgeClass": "tm-badge-primary",
+      "stopsCount": 10,
+      "lastUpdated": "Today at 10:24 AM"
+    },
+    {
+      "id": "trip-ooty-draft",
+      "title": "Nilgiri Mountain Tea Escape",
+      "destination": "Ooty, Tamil Nadu",
+      "dates": "Dec 20 – Dec 23, 2026",
+      "duration": "4 Days, 3 Nights",
+      "travelers": 4,
+      "budget": 28000,
+      "image": "https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=700&q=80",
+      "status": "Draft",
+      "badgeClass": "tm-badge-warning",
+      "stopsCount": 7,
+      "lastUpdated": "3 days ago",
+      "origin": "Coimbatore",
+      "startDate": "2026-12-20",
+      "endDate": "2026-12-23",
+      "daysCount": 4,
+      "budgetCategory": "Moderate",
+      "interests": [
+        "Nature",
+        "Tea Estates"
+      ]
+    },
+    {
+      "id": "trip-jaipur-completed",
+      "title": "Royal Rajputana Palaces & Forts",
+      "destination": "Jaipur, Rajasthan",
+      "dates": "Jan 10 – Jan 13, 2026",
+      "duration": "4 Days, 3 Nights",
+      "travelers": 2,
+      "budget": 22000,
+      "image": "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=700&q=80",
+      "status": "Completed",
+      "badgeClass": "tm-badge-success",
+      "stopsCount": 12,
+      "lastUpdated": "2 months ago",
+      "origin": "New Delhi",
+      "startDate": "2026-01-10",
+      "endDate": "2026-01-13",
+      "daysCount": 4,
+      "budgetCategory": "Moderate",
+      "interests": [
+        "Heritage",
+        "Forts"
+      ]
+    }
+  ],
+  "budget": {
+    "totalLimit": 20000,
+    "estimatedTotal": 15300,
+    "actualSpend": 1850,
+    "currency": "INR (₹)",
+    "categories": [
+      {
+        "id": "cat-transport",
+        "name": "Outbound & Return Transit",
+        "estimated": 3800,
+        "actual": 1080,
+        "icon": "bi-train-front",
+        "color": "#0D3B4C"
+      },
+      {
+        "id": "cat-hotel",
+        "name": "Accommodation (2 Nights)",
+        "estimated": 8400,
+        "actual": 0,
+        "icon": "bi-building",
+        "color": "#2A9D8F"
+      },
+      {
+        "id": "cat-local",
+        "name": "Local Cab & Auto Transit",
+        "estimated": 1200,
+        "actual": 320,
+        "icon": "bi-taxi-front",
+        "color": "#F4A261"
+      },
+      {
+        "id": "cat-food",
+        "name": "Food & Dining",
+        "estimated": 2400,
+        "actual": 450,
+        "icon": "bi-cup-hot",
+        "color": "#E76F51"
+      },
+      {
+        "id": "cat-attractions",
+        "name": "Attraction Tickets",
+        "estimated": 900,
+        "actual": 0,
+        "icon": "bi-ticket-perforated",
+        "color": "#3B82F6"
+      },
+      {
+        "id": "cat-misc",
+        "name": "Miscellaneous & Tips",
+        "estimated": 600,
+        "actual": 0,
+        "icon": "bi-gift",
+        "color": "#94A3B8"
+      }
+    ],
+    "items": [
+      {
+        "id": "bgt-1",
+        "name": "Bengaluru to Mysuru Vande Bharat Tickets (x2)",
+        "category": "Outbound & Return Transit",
+        "amount": 1080,
+        "status": "Actual",
+        "day": "Day 1"
+      },
+      {
+        "id": "bgt-2",
+        "name": "Grand Mercure Mysuru Stay (2 nights)",
+        "category": "Accommodation (2 Nights)",
+        "amount": 8400,
+        "status": "Estimated",
+        "day": "Days 1–3"
+      },
+      {
+        "id": "bgt-3",
+        "name": "Mysore Palace Entry & Audio Guides (x2)",
+        "category": "Attraction Tickets",
+        "amount": 200,
+        "status": "Estimated",
+        "day": "Day 1"
+      },
+      {
+        "id": "bgt-4",
+        "name": "Mylari Dosa & Lunch",
+        "category": "Food & Dining",
+        "amount": 450,
+        "status": "Actual",
+        "day": "Day 1"
+      },
+      {
+        "id": "bgt-5",
+        "name": "Local Auto Rickshaw Transfers",
+        "category": "Local Cab & Auto Transit",
+        "amount": 320,
+        "status": "Actual",
+        "day": "Day 1"
+      },
+      {
+        "id": "bgt-6",
+        "name": "Chamundi Hill Cab roundtrip",
+        "category": "Local Cab & Auto Transit",
+        "amount": 550,
+        "status": "Estimated",
+        "day": "Day 2"
+      },
+      {
+        "id": "bgt-7",
+        "name": "Zoo Tickets & Battery Cart (x2)",
+        "category": "Attraction Tickets",
+        "amount": 400,
+        "status": "Estimated",
+        "day": "Day 2"
+      },
+      {
+        "id": "bgt-8",
+        "name": "Brindavan / Rail Museum Entry",
+        "category": "Attraction Tickets",
+        "amount": 200,
+        "status": "Estimated",
+        "day": "Day 2"
+      },
+      {
+        "id": "bgt-9",
+        "name": "Dinner at Gufha Cave Restaurant",
+        "category": "Food & Dining",
+        "amount": 1200,
+        "status": "Estimated",
+        "day": "Day 2"
+      },
+      {
+        "id": "bgt-10",
+        "name": "Return KSRTC Airavat / Train Tickets (x2)",
+        "category": "Outbound & Return Transit",
+        "amount": 760,
+        "status": "Estimated",
+        "day": "Day 3"
+      },
+      {
+        "id": "bgt-11",
+        "name": "Mysore Pak Boxes & Silk Souvenirs",
+        "category": "Miscellaneous & Tips",
+        "amount": 600,
+        "status": "Estimated",
+        "day": "Day 3"
+      }
+    ]
+  }
+}

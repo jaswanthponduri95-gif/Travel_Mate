@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About & Help — TravelMate</title>
+  <meta name="description" content="Learn about TravelMate's system architecture, planning algorithms, Semester 3 CSE project specifications, and FAQ.">
+  
+  <!-- Bootstrap 5 CSS & Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- TravelMate Master Design System -->
+  <link rel="stylesheet" href="css/travelmate.css">
+</head>
+<body>
+
+  <!-- ================= GLOBAL NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg tm-navbar">
+    <div class="container-xl">
+      <a class="tm-brand" href="index.html">
+        <div class="tm-brand-logo"><i class="bi bi-compass"></i></div>
+        <span>TravelMate</span>
+        <span class="tm-brand-badge">About</span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#tmNavbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="tmNavbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="explore.html"><i class="bi bi-compass"></i> Explore</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="plan.html"><i class="bi bi-magic"></i> Plan a Trip</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="workspace.html"><i class="bi bi-map"></i> Itinerary</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="trips.html"><i class="bi bi-journal-bookmark"></i> My Trips</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link active" href="about.html"><i class="bi bi-info-circle"></i> About</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a href="workspace.html" class="tm-btn tm-btn-primary tm-btn-sm">
+            <i class="bi bi-map"></i> Live Workspace
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= HERO HEADER ================= -->
+  <div class="bg-white border-bottom py-5">
+    <div class="container-xl">
+      <div class="max-w-700">
+        <span class="tm-badge tm-badge-primary mb-2">Semester 3 CSE Project</span>
+        <h1 class="fw-bold text-dark display-6 mb-2">About TravelMate</h1>
+        <p class="lead text-muted m-0">
+          "Every Journey, Thoughtfully Planned." A unified travel planning architecture inspired by Wanderlog, developed to eliminate fragmented vacation organization.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <div class="container-xl py-5">
+    <div class="row g-5">
+      
+      <!-- LEFT COLUMN: SYSTEM ARCHITECTURE & WORKFLOW -->
+      <div class="col-lg-8">
+        
+        <!-- Project Vision -->
+        <div class="tm-card p-4 mb-4">
+          <h4 class="fw-bold text-dark mb-3"><i class="bi bi-bullseye text-primary"></i> Project Vision & Core Differentiator</h4>
+          <p class="text-secondary small" style="line-height: 1.7;">
+            Planning an Indian trip typically requires cross-referencing multiple unconnected platforms: IRCTC for train schedules, RedBus for highway routes, Google Maps for distances, booking portals for hotels, and manual spreadsheets for budgeting.
+          </p>
+          <p class="text-secondary small mb-0" style="line-height: 1.7;">
+            <strong>TravelMate</strong> consolidates every phase of the journey into an intelligent, interactive workspace. By uniting timeline scheduling with real-time map synchronization, weather-aware alternative heuristics, and automated budget allocation, users can organize complex multi-day tours with peace of mind.
+          </p>
+        </div>
+
+        <!-- System Architecture & Constraints -->
+        <div class="tm-card p-4 mb-4">
+          <h4 class="fw-bold text-dark mb-3"><i class="bi bi-diagram-3 text-primary"></i> Technology Architecture</h4>
+          
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle small mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th style="width: 25%;">Layer</th>
+                  <th colspan="2">Technology &amp; Implementation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-bold">Presentation UI</td>
+                  <td colspan="2">HTML5, CSS3 (Design Tokens), Bootstrap 5.3</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">Client Logic</td>
+                  <td colspan="2">JavaScript (ES6+), Fetch API, Leaflet and OpenStreetMap</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">Application Server</td>
+                  <td colspan="2">Java 17, Jakarta Servlets, Maven WAR and Apache Tomcat 10+</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">Persistence</td>
+                  <td colspan="2">MySQL 8.x with JDBC (MySQL Connector/J)</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">APIs &amp; AI</td>
+                  <td colspan="2">AI-powered itinerary assistance, weather information and smart travel suggestions</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Planning Workflow Steps -->
+        <div class="tm-card p-4 mb-4">
+          <h4 class="fw-bold text-dark mb-3"><i class="bi bi-arrow-repeat text-primary"></i> How The Workspace Operates</h4>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="p-3 bg-light rounded-3 border h-100">
+                <span class="badge bg-primary mb-2">Step 1</span>
+                <h6 class="fw-bold text-dark mb-1">Configuration</h6>
+                <p class="small text-muted m-0">User inputs origin, destination, duration, party size, budget tier, and personal interest chips.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 bg-light rounded-3 border h-100">
+                <span class="badge bg-primary mb-2">Step 2</span>
+                <h6 class="fw-bold text-dark mb-1">Timeline & Routing</h6>
+                <p class="small text-muted m-0">The engine groups attractions chronologically, connects transit routes on OpenStreetMap, and allocates meals.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="p-3 bg-light rounded-3 border h-100">
+                <span class="badge bg-primary mb-2">Step 3</span>
+                <h6 class="fw-bold text-dark mb-1">Dynamic Balancing</h6>
+                <p class="small text-muted m-0">Weather forecast monitoring triggers indoor alternatives if showers are predicted during outdoor stops.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="tm-card p-4" id="faq">
+          <h4 class="fw-bold text-dark mb-3"><i class="bi bi-question-circle text-primary"></i> Frequently Asked Questions</h4>
+          
+          <div class="accordion accordion-flush" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq-1">
+                  Are the train, bus, and hotel prices guaranteed?
+                </button>
+              </h2>
+              <div id="faq-1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body small text-muted">
+                  Displayed prices are indicative estimates intended to help with trip budgeting. Actual fares, hotel rates, schedules and availability may change and should be confirmed on the respective booking provider's website.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq-2">
+                  How does the interactive map synchronize with the itinerary?
+                </button>
+              </h2>
+              <div id="faq-2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body small text-muted">
+                  TravelMate embeds a Leaflet.js engine connected to OpenStreetMap. Each stop on your timeline corresponds to a numbered pin on the map. Clicking an itinerary card pans and opens the map popup; clicking a pin highlights and scrolls to the itinerary card.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq-3">
+                  Can I print or share my itinerary?
+                </button>
+              </h2>
+              <div id="faq-3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body small text-muted">
+                  Yes! Click "Share / Export" in the Itinerary Workspace to copy a shareable trip link, trigger browser print-to-PDF formatting, or export calendar events.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed fw-semibold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq-4">
+                  How is TravelMate deployed?
+                </button>
+              </h2>
+              <div id="faq-4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body small text-muted">
+                  TravelMate is packaged as a Maven WAR application and can be deployed on Apache Tomcat. Its web assets, Java servlet endpoints and database integration are organized for straightforward deployment and maintenance.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: FEEDBACK & CONTACT FORM -->
+      <div class="col-lg-4">
+        <div class="tm-card p-4 mb-4">
+          <h5 class="fw-bold text-dark mb-2"><i class="bi bi-chat-left-dots text-primary"></i> Project Feedback & Query</h5>
+          <p class="small text-muted mb-3">Submit inquiries or suggestions regarding the TravelMate platform.</p>
+
+          <form onsubmit="handleFeedbackSubmit(event)">
+            <div class="mb-3">
+              <label for="fb-name" class="form-label small fw-bold text-muted">NAME *</label>
+              <input type="text" class="form-control tm-form-control" id="fb-name" required placeholder="Your Name">
+            </div>
+
+            <div class="mb-3">
+              <label for="fb-email" class="form-label small fw-bold text-muted">EMAIL *</label>
+              <input type="email" class="form-control tm-form-control" id="fb-email" required placeholder="name@college.edu">
+            </div>
+
+            <div class="mb-3">
+              <label for="fb-topic" class="form-label small fw-bold text-muted">TOPIC</label>
+              <select class="form-select tm-form-control" id="fb-topic">
+                <option value="General">General Inquiry</option>
+                <option value="Evaluation">Semester 3 Evaluation Query</option>
+                <option value="Feature">Feature Suggestion</option>
+                <option value="Bug">UI Bug Report</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="fb-message" class="form-label small fw-bold text-muted">MESSAGE *</label>
+              <textarea class="form-control tm-form-control" id="fb-message" rows="3" required placeholder="Write your message here..."></textarea>
+            </div>
+
+            <button type="submit" class="tm-btn tm-btn-primary w-100 py-2">
+              <i class="bi bi-send-fill"></i> Send Message
+            </button>
+          </form>
+        </div>
+
+        <div class="p-3 bg-white rounded-3 border text-center">
+          <div class="fw-bold text-dark mb-1">Academic Project Details</div>
+          <p class="small text-muted mb-0">
+            Course: Semester 3 Computer Science & Engineering<br>
+            Project Name: <strong>TravelMate</strong><br>
+            Frontend: HTML, CSS, Bootstrap and JavaScript<br>
+            Backend: Java Servlets, Tomcat and MySQL JDBC
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function handleFeedbackSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById("fb-name").value;
+      event.target.reset();
+      showToast(`Thank you, ${name}! Your feedback has been recorded.`, "success", "bi-check-circle-fill");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transport Comparison — TravelMate</title>
+  <meta name="description" content="Compare sample transport options and continue searches on external booking platforms.">
+  
+  <!-- Bootstrap 5 CSS & Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- TravelMate Master Design System -->
+  <link rel="stylesheet" href="css/travelmate.css">
+</head>
+<body>
+
+  <!-- ================= GLOBAL NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg tm-navbar">
+    <div class="container-xl">
+      <a class="tm-brand" href="index.html">
+        <div class="tm-brand-logo"><i class="bi bi-compass"></i></div>
+        <span>TravelMate</span>
+        <span class="tm-brand-badge">Transport</span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#tmNavbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="tmNavbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="explore.html"><i class="bi bi-compass"></i> Explore</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="plan.html"><i class="bi bi-magic"></i> Plan</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="workspace.html"><i class="bi bi-map"></i> Itinerary</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link active" href="transport.html"><i class="bi bi-train-front"></i> Transport</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="hotels.html"><i class="bi bi-building"></i> Hotels</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="food.html"><i class="bi bi-cup-hot"></i> Food</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="budget.html"><i class="bi bi-wallet2"></i> Budget</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="trips.html"><i class="bi bi-journal-bookmark"></i> My Trips</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a href="workspace.html" class="tm-btn tm-btn-accent tm-btn-sm">
+            <i class="bi bi-arrow-left"></i> Back to Workspace
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= TOP SEARCH SUMMARY BANNER ================= -->
+  <div class="bg-white border-bottom py-3">
+    <div class="container-xl d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div class="d-flex align-items-center gap-3">
+        <div class="p-2 bg-light rounded-3 text-primary fs-4">
+          <i class="bi bi-signpost-2"></i>
+        </div>
+        <div>
+          <div class="d-flex align-items-center gap-2">
+            <h4 class="fw-bold m-0 text-dark"><span id="tr-header-origin">Origin</span> ➔ <span id="tr-header-dest">Destination</span></h4>
+            <span class="tm-badge tm-badge-primary">Intercity Transit</span>
+          </div>
+          <div class="small text-muted mt-1">
+            <i class="bi bi-calendar-event"></i> <span id="tr-header-date">Date not set</span> &bull; 
+            <i class="bi bi-people"></i> <span id="tr-header-travelers">Travelers not set</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <a href="plan.html" class="tm-btn tm-btn-outline tm-btn-sm">
+          <i class="bi bi-sliders"></i> Modify Search
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <div class="container-xl py-4">
+    <div class="row g-4">
+      
+      <!-- LEFT / MAIN RESULTS COLUMN -->
+      <div class="col-lg-8">
+        <!-- Controls: Multimodal Filter Pills & Sort Selector -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 bg-white p-3 rounded-3 border">
+          <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="tm-day-tab tm-transport-filter-btn active" data-mode="all">
+              All Modes
+            </button>
+            <button type="button" class="tm-day-tab tm-transport-filter-btn" data-mode="train">
+              <i class="bi bi-train-front"></i> Trains (2)
+            </button>
+            <button type="button" class="tm-day-tab tm-transport-filter-btn" data-mode="bus">
+              <i class="bi bi-bus-front"></i> Buses (2)
+            </button>
+            <button type="button" class="tm-day-tab tm-transport-filter-btn" data-mode="flight">
+              <i class="bi bi-airplane"></i> Flights (1)
+            </button>
+            <button type="button" class="tm-day-tab tm-transport-filter-btn" data-mode="car">
+              <i class="bi bi-car-front"></i> Cab / Self-Drive (1)
+            </button>
+          </div>
+
+          <div class="d-flex align-items-center gap-2 ms-auto">
+            <label for="transport-sort-select" class="small text-muted text-nowrap fw-semibold">Sort by:</label>
+            <select class="form-select form-select-sm" id="transport-sort-select" style="width: auto;">
+              <option value="recommended">Recommended</option>
+              <option value="cheapest">Cheapest Fare</option>
+              <option value="fastest">Shortest Duration</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-2 px-1">
+          <span class="small text-muted fw-semibold" id="transport-results-count">Showing sample route options</span>
+          <span class="tm-badge tm-badge-demo">External booking links</span>
+        </div>
+
+        <!-- Cards Container -->
+        <div id="transport-cards-container">
+          <!-- Populated by transport.js -->
+        </div>
+      </div>
+
+      <!-- RIGHT SIDEBAR: ROUTE INSIGHTS -->
+      <div class="col-lg-4">
+        <div class="tm-card p-4 mb-4">
+          <h5 class="fw-bold text-dark mb-3"><i class="bi bi-info-circle text-primary"></i> Route Insights</h5>
+          
+          <div class="mb-3">
+            <h6 class="fw-semibold small text-dark mb-1">Route-specific journey times</h6>
+            <p class="small text-muted m-0">Travel time and distance depend on the origin and destination selected in your active trip. Check the provider for live schedules and traffic conditions.</p>
+          </div>
+
+          <div class="mb-3 border-top pt-3">
+            <h6 class="fw-semibold small text-dark mb-1">Rail and bus connections</h6>
+            <p class="small text-muted m-0">Available services vary by route and travel date. Compare live departure times, stops, fares and seat availability with the transport provider before booking.</p>
+          </div>
+
+          <div class="border-top pt-3">
+            <h6 class="fw-semibold small text-dark mb-1">Driving and self-drive</h6>
+            <p class="small text-muted m-0">Driving directions use your active trip route. Confirm road conditions, tolls and estimated arrival time before departure.</p>
+          </div>
+        </div>
+
+        <div class="p-3 bg-white rounded-3 border text-center">
+          <i class="bi bi-wallet2 text-success fs-3 mb-2 d-block"></i>
+          <h6 class="fw-bold mb-1">Included in Budget</h6>
+          <p class="small text-muted mb-2">External providers handle availability, final fares and booking. TravelMate keeps your trip route and itinerary.</p>
+          <a href="budget.html" class="tm-btn tm-btn-outline tm-btn-sm w-100">
+            View Budget Ledger &rarr;
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/transport.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                             https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <display-name>TravelMate</display-name>
+    <description>AI-Powered Travel Planning Platform</description>
+
+    <!-- Jetty (mvn jetty:run) only: don't lock static files on Windows, so they can be edited while running.
+         Tomcat ignores this parameter. -->
+    <context-param>
+        <param-name>org.eclipse.jetty.servlet.Default.useFileMappedBuffer</param-name>
+        <param-value>false</param-value>
+    </context-param>
+
+    <!-- Welcome File List -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- Session Configuration -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
+    <!--
+        Phase 2 backend. Servlets, the CORS filter and the start-up listener are registered
+        with annotations (@WebServlet / @WebFilter / @WebListener) in com.travelmate.servlet:
+          /api/health        HealthServlet      database connectivity check
+          /api/trips/*       TripServlet        trips, itinerary days and stops
+          /api/budget/*      BudgetServlet      budget limit and expense items
+          /api/auth/*        AuthServlet        register / login / logout / me
+          /api/demo/reset    DemoDataServlet    restore demo data
+          /api/destinations/* DestinationServlet catalog destinations
+          /api/hotels/*       HotelServlet       catalog hotels
+          /api/restaurants/*  RestaurantServlet  catalog restaurants
+          /api/transport/*    TransportServlet   catalog transport options
+        Database settings: src/main/resources/db.properties
+    -->
+</web-app>

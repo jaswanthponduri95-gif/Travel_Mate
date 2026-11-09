@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Destinations — TravelMate</title>
+  <meta name="description" content="Discover India's top travel destinations, seasonal recommendations, must-try cuisines, and curated itineraries.">
+  
+  <!-- Bootstrap 5 CSS & Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- TravelMate Master Design System -->
+  <link rel="stylesheet" href="css/travelmate.css">
+</head>
+<body>
+
+  <!-- ================= GLOBAL NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg tm-navbar">
+    <div class="container-xl">
+      <a class="tm-brand" href="index.html">
+        <div class="tm-brand-logo"><i class="bi bi-compass"></i></div>
+        <span>TravelMate</span>
+        <span class="tm-brand-badge">Explore</span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#tmNavbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="tmNavbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link active" href="explore.html"><i class="bi bi-compass"></i> Explore</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="plan.html"><i class="bi bi-magic"></i> Plan a Trip</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="workspace.html"><i class="bi bi-map"></i> Itinerary</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="trips.html"><i class="bi bi-journal-bookmark"></i> My Trips</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="about.html"><i class="bi bi-info-circle"></i> About</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a href="plan.html" class="tm-btn tm-btn-accent tm-btn-sm">
+            <i class="bi bi-plus-circle"></i> Plan Custom Trip
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= DISCOVERY SEARCH & FILTER HEADER ================= -->
+  <div class="bg-white border-bottom py-4">
+    <div class="container-xl">
+      <div class="row align-items-center g-3 mb-3">
+        <div class="col-lg-6">
+          <h2 class="fw-bold m-0 text-dark">Explore Destinations</h2>
+          <p class="text-muted small m-0 mt-1">Discover royal heritage, misty hill stations, and sun-soaked beaches across India.</p>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="input-group">
+            <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
+            <input type="text" class="form-control tm-form-control border-start-0" id="explore-search-input" placeholder="Search by city, state, or experience (e.g. Mysuru, Ooty, Palace)...">
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters Row -->
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 pt-2 border-top">
+        <div class="d-flex flex-wrap gap-2">
+          <button type="button" class="tm-chip explore-cat-chip active" data-category="all">
+            All Destinations
+          </button>
+          <button type="button" class="tm-chip explore-cat-chip" data-category="Heritage">
+            <i class="bi bi-bank"></i> Heritage
+          </button>
+          <button type="button" class="tm-chip explore-cat-chip" data-category="Hill Station">
+            <i class="bi bi-cloud-snow"></i> Hill Stations
+          </button>
+          <button type="button" class="tm-chip explore-cat-chip" data-category="Beach">
+            <i class="bi bi-water"></i> Beaches
+          </button>
+          <button type="button" class="tm-chip explore-cat-chip" data-category="Nature">
+            <i class="bi bi-tree"></i> Nature & Tea
+          </button>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+          <span class="small text-muted fw-semibold">Region:</span>
+          <select class="form-select form-select-sm" id="explore-region-select" style="width: auto;">
+            <option value="all">All Regions</option>
+            <option value="South">South India</option>
+            <option value="North">North India</option>
+            <option value="West">West India</option>
+          </select>
+          <span class="tm-badge tm-badge-primary" id="explore-count-badge">6 Destinations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= DESTINATIONS GRID ================= -->
+  <div class="container-xl py-5">
+    <div class="row g-4" id="explore-dest-grid">
+      <!-- Populated dynamically via explore.js -->
+    </div>
+  </div>
+
+  <!-- ================= DESTINATION DETAIL MODAL ================= -->
+  <div class="modal fade" id="destinationDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content tm-modal-content">
+        <div class="modal-header tm-modal-header d-flex justify-content-between align-items-center">
+          <h5 class="modal-title fw-bold text-dark d-flex align-items-center gap-2">
+            <i class="bi bi-geo-alt-fill text-primary"></i> <span id="detail-modal-title">Mysuru, Karnataka</span>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body tm-modal-body p-0">
+          <div style="height: 250px; overflow: hidden; position: relative;">
+            <img id="detail-modal-image" src="" class="w-100 h-100 object-fit-cover" alt="Destination">
+            <span class="badge bg-primary position-absolute bottom-0 start-0 m-3 fs-6" id="detail-modal-category">Heritage</span>
+          </div>
+
+          <div class="p-4">
+            <h6 class="fw-bold text-dark mb-2">Destination Overview</h6>
+            <p class="small text-secondary mb-4" id="detail-modal-desc" style="line-height: 1.6;"></p>
+
+            <div class="row g-3 mb-4">
+              <div class="col-md-4">
+                <div class="p-3 bg-light rounded-3 border h-100">
+                  <small class="text-muted d-block fw-semibold mb-1"><i class="bi bi-clock"></i> SUGGESTED DURATION</small>
+                  <span class="fw-bold text-dark" id="detail-modal-days">3 Days</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="p-3 bg-light rounded-3 border h-100">
+                  <small class="text-muted d-block fw-semibold mb-1"><i class="bi bi-calendar-check"></i> BEST SEASON</small>
+                  <span class="fw-bold text-dark small" id="detail-modal-season">Oct to March</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="p-3 bg-light rounded-3 border h-100">
+                  <small class="text-muted d-block fw-semibold mb-1"><i class="bi bi-wallet2"></i> BUDGET RANGE</small>
+                  <span class="fw-bold text-success small" id="detail-modal-budget">₹4,500 – ₹12,000</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-md-6">
+                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-star text-warning"></i> Key Highlights</h6>
+                <ul class="list-unstyled ps-0" id="detail-modal-highlights">
+                  <!-- Highlights -->
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h6 class="fw-bold text-dark mb-2"><i class="bi bi-cup-hot text-danger"></i> Famous Local Cuisine</h6>
+                <div id="detail-modal-cuisine" class="d-flex flex-wrap">
+                  <!-- Cuisine chips -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer tm-modal-footer d-flex justify-content-between">
+          <button type="button" class="tm-btn tm-btn-outline" data-bs-dismiss="modal">Close</button>
+          <a id="detail-modal-plan-btn" href="#" class="tm-btn tm-btn-accent">
+            <i class="bi bi-magic"></i> Plan Trip To This Destination
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/explore.js"></script>
+</body>
+</html>

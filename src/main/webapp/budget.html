@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budget & Expenses — TravelMate</title>
+  <meta name="description" content="Track your trip expenses, monitor category allocations, and avoid unexpected overspending.">
+  
+  <!-- Bootstrap 5 CSS & Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- TravelMate Master Design System -->
+  <link rel="stylesheet" href="css/travelmate.css">
+</head>
+<body>
+
+  <!-- ================= GLOBAL NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg tm-navbar">
+    <div class="container-xl">
+      <a class="tm-brand" href="index.html">
+        <div class="tm-brand-logo"><i class="bi bi-compass"></i></div>
+        <span>TravelMate</span>
+        <span class="tm-brand-badge">Budget</span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#tmNavbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="tmNavbarMain">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="index.html"><i class="bi bi-house-door"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="explore.html"><i class="bi bi-compass"></i> Explore</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="plan.html"><i class="bi bi-magic"></i> Plan</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="workspace.html"><i class="bi bi-map"></i> Itinerary</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="transport.html"><i class="bi bi-train-front"></i> Transport</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="hotels.html"><i class="bi bi-building"></i> Hotels</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="food.html"><i class="bi bi-cup-hot"></i> Food</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link active" href="budget.html"><i class="bi bi-wallet2"></i> Budget</a></li>
+          <li class="nav-item"><a class="nav-link tm-nav-link" href="trips.html"><i class="bi bi-journal-bookmark"></i> My Trips</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="tm-btn tm-btn-accent tm-btn-sm" data-bs-toggle="modal" data-bs-target="#addExpenseModal">
+            <i class="bi bi-plus-lg"></i> Add Expense
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= BUDGET DASHBOARD HEADER ================= -->
+  <div class="bg-white border-bottom py-4">
+    <div class="container-xl">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+          <h3 class="fw-bold m-0 text-dark">Trip Budget Dashboard</h3>
+          <p class="text-muted small m-0 mt-1" id="bgt-trip-subtitle">Mysuru Royal Heritage (3 Days, 2 Travelers)</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span id="bgt-health-status" class="tm-badge tm-badge-success">Within Budget</span>
+          <button type="button" class="tm-btn tm-btn-outline tm-btn-sm" onclick="handleExportBudgetCsv()">
+            <i class="bi bi-download"></i> Export CSV
+          </button>
+        </div>
+      </div>
+
+      <!-- Key Metrics Row -->
+      <div class="row g-3">
+        <div class="col-sm-6 col-lg-3">
+          <div class="p-3 bg-light rounded-3 border">
+            <span class="small text-muted d-block fw-semibold">BUDGET TARGET</span>
+            <h4 class="fw-bold text-dark m-0 mt-1" id="bgt-total-limit">₹20,000</h4>
+            <small class="text-muted">Configured limit</small>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3">
+          <div class="p-3 bg-light rounded-3 border">
+            <span class="small text-muted d-block fw-semibold">ESTIMATED TOTAL</span>
+            <h4 class="fw-bold text-primary m-0 mt-1" id="bgt-estimated-total">₹15,300</h4>
+            <small class="text-muted" id="bgt-per-person">₹7,650 / person</small>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3">
+          <div class="p-3 bg-light rounded-3 border">
+            <span class="small text-muted d-block fw-semibold">ACTUAL RECORDED</span>
+            <h4 class="fw-bold text-success m-0 mt-1" id="bgt-actual-spend">₹1,850</h4>
+            <small class="text-muted">Paid tickets & meals</small>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3">
+          <div class="p-3 bg-light rounded-3 border">
+            <span class="small text-muted d-block fw-semibold">REMAINING BUFFER</span>
+            <h4 class="fw-bold text-success m-0 mt-1" id="bgt-remaining">₹4,700</h4>
+            <small class="text-success fw-semibold">Comfortable headroom</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN CONTENT: CATEGORIES & ITEMS ================= -->
+  <div class="container-xl py-4">
+    <div class="row g-4">
+      
+      <!-- LEFT: CATEGORY ALLOCATIONS -->
+      <div class="col-lg-5">
+        <div class="tm-card p-4">
+          <h5 class="fw-bold text-dark mb-3"><i class="bi bi-pie-chart text-primary"></i> Category Allocations</h5>
+          <div id="bgt-categories-container">
+            <!-- Populated via budget.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: EXPENSE LEDGER TABLE -->
+      <div class="col-lg-7">
+        <div class="tm-card p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-dark m-0"><i class="bi bi-list-check text-primary"></i> Expense Items</h5>
+            <button type="button" class="tm-btn tm-btn-outline-primary tm-btn-sm" data-bs-toggle="modal" data-bs-target="#addExpenseModal">
+              <i class="bi bi-plus-lg"></i> Add Item
+            </button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead class="table-light small text-muted">
+                <tr>
+                  <th>ITEM</th>
+                  <th>CATEGORY</th>
+                  <th>DAY</th>
+                  <th>STATUS</th>
+                  <th>AMOUNT</th>
+                  <th class="text-end">ACTION</th>
+                </tr>
+              </thead>
+              <tbody id="bgt-items-table-body" class="small">
+                <!-- Populated via budget.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= ADD EXPENSE MODAL ================= -->
+  <div class="modal fade" id="addExpenseModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content tm-modal-content">
+        <div class="modal-header tm-modal-header d-flex justify-content-between align-items-center">
+          <h5 class="modal-title fw-bold text-dark"><i class="bi bi-wallet2 text-primary"></i> Add Expense Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="add-expense-form" onsubmit="handleAddNewExpense(event)">
+          <div class="modal-body tm-modal-body">
+            <div class="mb-3">
+              <label class="form-label small fw-bold text-muted">ITEM / DESCRIPTION *</label>
+              <input type="text" class="form-control tm-form-control" id="exp-name" required placeholder="e.g. Chamundi Hill Taxi, Souvenirs">
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label small fw-bold text-muted">CATEGORY</label>
+                <select class="form-select tm-form-control" id="exp-category" required>
+                  <option value="Outbound & Return Transit">Transit Tickets</option>
+                  <option value="Accommodation (2 Nights)">Accommodation</option>
+                  <option value="Local Cab & Auto Transit">Local Auto / Cab</option>
+                  <option value="Food & Dining">Food & Dining</option>
+                  <option value="Attraction Tickets">Sightseeing Tickets</option>
+                  <option value="Miscellaneous & Tips">Shopping & Misc</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label class="form-label small fw-bold text-muted">ASSOCIATED DAY</label>
+                <select class="form-select tm-form-control" id="exp-day">
+                  <option value="Day 1">Day 1</option>
+                  <option value="Day 2">Day 2</option>
+                  <option value="Day 3">Day 3</option>
+                  <option value="General">Entire Trip</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="form-label small fw-bold text-muted">AMOUNT (INR ₹) *</label>
+                <input type="number" class="form-control tm-form-control" id="exp-amount" required min="1" placeholder="500">
+              </div>
+              <div class="col-6">
+                <label class="form-label small fw-bold text-muted">EXPENSE STATUS</label>
+                <select class="form-select tm-form-control" id="exp-status">
+                  <option value="Estimated">Estimated</option>
+                  <option value="Actual" selected>Actual (Already Paid)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer tm-modal-footer">
+            <button type="button" class="tm-btn tm-btn-outline" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="tm-btn tm-btn-primary">Add Expense</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/budget.js"></script>
+</body>
+</html>
