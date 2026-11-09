@@ -2,7 +2,6 @@
 
 HTML/JS frontend + Java Servlet backend (Jakarta Servlet 5, Tomcat 10+) + MySQL 8 via JDBC.
 
-## Windows setup\n\nSee [WINDOWS-POWERSHELL-SETUP.md](WINDOWS-POWERSHELL-SETUP.md) for PowerShell commands to configure MySQL/AI, run checks, build, and launch the application.\n\n## Run it
 
 ### 1. With MySQL (the real setup)
 
