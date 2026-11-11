@@ -77,6 +77,20 @@
 }
 
 /* Base Reset & Typography */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Only on body (propagates to the viewport) so sticky navbar keeps working */
+body {
+  overflow-x: hidden;
+}
+
+img, video, canvas, iframe {
+  max-width: 100%;
+}
+
 body {
   font-family: var(--tm-font-sans);
   background-color: var(--tm-bg);
@@ -110,7 +124,7 @@ a:hover {
    NAVIGATION BAR
    ========================================================================== */
 .tm-navbar {
-  height: var(--tm-navbar-height);
+  min-height: var(--tm-navbar-height);
   background: var(--tm-surface);
   border-bottom: 1px solid var(--tm-border);
   box-shadow: var(--tm-shadow-xs);
@@ -952,4 +966,320 @@ a:hover {
 @media (max-width: 767.98px) {
   .ws-quick-actions { grid-template-columns: minmax(0, 1fr); }
   .ws-quick-action { justify-content: flex-start; text-align: left; }
+}
+
+
+/* ==========================================================================
+   MOBILE-FIRST RESPONSIVE LAYER
+   Applies only below desktop breakpoints; desktop styling is unchanged.
+   ========================================================================== */
+
+/* ---------- Tablets & phones: collapsed navbar (< 992px) ---------- */
+@media (max-width: 991.98px) {
+  .tm-navbar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .tm-navbar .navbar-toggler {
+    padding: 8px 10px;
+    border-radius: var(--tm-radius-sm);
+  }
+
+  .tm-navbar .navbar-toggler:focus {
+    box-shadow: 0 0 0 3px rgba(var(--tm-primary-rgb), 0.15);
+  }
+
+  /* Opened menu becomes a clean, scrollable panel */
+  .tm-navbar .navbar-collapse {
+    margin-top: 10px;
+    padding: 12px 0 6px;
+    border-top: 1px solid var(--tm-border);
+    max-height: calc(100vh - var(--tm-navbar-height));
+    max-height: calc(100dvh - var(--tm-navbar-height));
+    overflow-y: auto;
+  }
+
+  .tm-navbar .navbar-nav {
+    margin-bottom: 12px !important;
+  }
+
+  .tm-nav-link {
+    display: flex;
+    width: 100%;
+    padding: 12px 14px !important;
+    font-size: 1rem;
+  }
+
+  /* Sign in / CTA buttons stack full width inside the menu */
+  .tm-navbar .navbar-collapse > .d-flex {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .tm-navbar .navbar-collapse > .d-flex > .tm-btn,
+  .tm-navbar .navbar-collapse > .d-flex > .btn,
+  .tm-navbar .navbar-collapse > .d-flex > .dropdown {
+    flex: 1 1 140px;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .tm-hero {
+    padding: 40px 0 56px;
+  }
+
+  .tm-search-input-group {
+    border-right: none;
+    border-bottom: 1px solid var(--tm-border-light);
+  }
+
+  /* Workspace map/itinerary stack */
+  .tm-workspace-sidebar {
+    padding: 20px 16px;
+  }
+
+  .tm-workspace-map {
+    height: 60vh;
+    min-height: 320px;
+  }
+
+  #ws-map-container {
+    min-height: 320px !important;
+  }
+}
+
+/* ---------- Phones & small tablets (< 768px) ---------- */
+@media (max-width: 767.98px) {
+  /* Bootstrap's large gutters overflow the screen with small container padding */
+  .row.g-5, .row.gx-5 { --bs-gutter-x: 1.5rem; }
+  .row.g-5, .row.gy-5 { --bs-gutter-y: 1.75rem; }
+  .row.g-4, .row.gx-4 { --bs-gutter-x: 1rem; }
+  .row.g-4, .row.gy-4 { --bs-gutter-y: 1rem; }
+
+  .container, .container-sm, .container-md, .container-lg,
+  .container-xl, .container-xxl, .container-fluid {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  section.py-5, .py-5 {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
+  }
+
+  .mb-5 { margin-bottom: 2rem !important; }
+
+  h1, .h1 { font-size: 1.75rem; }
+  h2, .h2 { font-size: 1.5rem; }
+  h3, .h3 { font-size: 1.3rem; }
+  .display-5 { font-size: 2.25rem; }
+  .display-6 { font-size: 1.75rem; }
+  .lead { font-size: 1.05rem; }
+
+  .tm-hero-subtitle {
+    margin-bottom: 1.5rem;
+  }
+
+  .tm-search-box {
+    padding: 16px;
+    border-radius: var(--tm-radius-lg);
+  }
+
+  .tm-card {
+    border-radius: var(--tm-radius-md);
+  }
+
+  .tm-dest-image-wrap {
+    height: 180px;
+  }
+
+  /* Prevent iOS auto-zoom on focus (needs >= 16px) */
+  input.form-control, select.form-select, textarea.form-control,
+  .tm-form-control, .tm-search-input,
+  input[type="text"], input[type="email"], input[type="password"],
+  input[type="number"], input[type="date"], input[type="search"],
+  input[type="tel"], select, textarea {
+    font-size: 16px;
+  }
+
+  /* Headers like "Title ......... [Button]" wrap instead of overflowing */
+  .d-flex.justify-content-between {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Wide content scrolls inside its card instead of the page */
+  .table {
+    min-width: 520px;
+  }
+  .table-responsive, .tm-card:has(> .table) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-tabs, .nav-pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-tabs::-webkit-scrollbar, .nav-pills::-webkit-scrollbar { display: none; }
+  .nav-tabs .nav-link, .nav-pills .nav-link { white-space: nowrap; }
+
+  .tm-day-tabs {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tm-day-tabs::-webkit-scrollbar { display: none; }
+
+  /* Modals: use the screen edge-to-edge with comfortable padding */
+  .modal-dialog {
+    margin: 12px;
+  }
+  .tm-modal-header, .tm-modal-footer {
+    padding: 14px 16px;
+  }
+  .tm-modal-body {
+    padding: 16px;
+  }
+  .tm-modal-footer, .modal-footer {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tm-modal-footer > .tm-btn, .modal-footer > .tm-btn, .modal-footer > .btn {
+    flex: 1 1 auto;
+    margin: 0;
+  }
+
+  /* Toasts span the bottom of the screen */
+  .tm-toast-container {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+  .tm-toast {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+  }
+
+  /* Weather page inline fixed widths */
+  #wt-search-suggestions {
+    width: auto !important;
+    left: 12px;
+    right: 12px;
+  }
+  #wt-manual-coords-row .input-group {
+    width: auto !important;
+    flex: 1 1 140px;
+  }
+
+  /* Workspace map overlays */
+  .tm-workspace-map .position-absolute {
+    max-width: calc(100% - 24px) !important;
+  }
+
+  .tm-footer {
+    padding: 40px 0 20px;
+  }
+  .tm-footer-bottom {
+    margin-top: 28px;
+    text-align: center;
+  }
+  .tm-footer-bottom .d-flex {
+    justify-content: center !important;
+  }
+}
+
+/* ---------- Small phones (< 576px) ---------- */
+@media (max-width: 575.98px) {
+  :root {
+    --tm-navbar-height: 62px;
+  }
+
+  .tm-brand {
+    font-size: 1.2rem;
+  }
+
+  .tm-brand-logo {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
+  .tm-brand-badge {
+    display: none;
+  }
+
+  .tm-hero {
+    padding: 28px 0 40px;
+  }
+
+  .tm-hero-title {
+    font-size: 2rem;
+  }
+
+  /* Buttons: allow long labels to wrap, keep 44px touch targets */
+  .tm-btn {
+    white-space: normal;
+    text-align: center;
+    min-height: 44px;
+  }
+  .tm-btn-sm {
+    min-height: 38px;
+    white-space: nowrap;
+  }
+  .tm-btn-lg {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+
+  /* Button groups at the end of forms/sections stack nicely */
+  .d-flex.gap-2 > .tm-btn-lg,
+  .d-flex.gap-3 > .tm-btn-lg {
+    flex: 1 1 100%;
+  }
+
+  .tm-chip {
+    padding: 7px 13px;
+    font-size: 0.85rem;
+  }
+
+  .tm-stop-card {
+    padding: 14px 12px;
+  }
+  .tm-stop-card:hover {
+    transform: none;
+  }
+
+  .tm-timeline {
+    padding-left: 24px;
+  }
+  .tm-timeline::before {
+    left: 10px;
+  }
+  .tm-stop-node {
+    left: -24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .tm-dest-image-wrap {
+    height: 170px;
+  }
+
+  .display-5 { font-size: 2rem; }
+  .display-6 { font-size: 1.5rem; }
+}
+
+/* Touch devices: no hover lift jitter */
+@media (hover: none) {
+  .tm-card-hover-elevate:hover,
+  .tm-btn-primary:hover,
+  .tm-btn-accent:hover {
+    transform: none;
+  }
 }
