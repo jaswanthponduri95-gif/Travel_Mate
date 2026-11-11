@@ -91,6 +91,30 @@ img, video, canvas, iframe {
   max-width: 100%;
 }
 
+/* Container Padding & Max-Width Enhancements */
+.container,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl,
+.container-xxl {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Layout Utilities */
+.max-w-600 { max-width: 600px; }
+.max-w-700 { max-width: 700px; }
+.max-w-800 { max-width: 800px; }
+.cursor-pointer { cursor: pointer; }
+.border-2 { border-width: 2px !important; }
+
+@media (min-width: 768px) {
+  .border-start-md {
+    border-left: 1px solid var(--tm-border) !important;
+  }
+}
+
 body {
   font-family: var(--tm-font-sans);
   background-color: var(--tm-bg);
@@ -810,6 +834,39 @@ a:hover {
   display: none;
 }
 
+/* Intermediate desktop navbar (992px - 1199px): ensure all links fit without wrapping */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .tm-nav-link {
+    font-size: 0.825rem;
+    padding: 6px 8px !important;
+    gap: 4px;
+  }
+  .tm-brand {
+    font-size: 1.15rem;
+  }
+}
+
+/* Desktop workspace: fit seamlessly in 100vh with no outer window scroll */
+@media (min-width: 992px) {
+  body.tm-workspace-body,
+  body:has(.tm-workspace-layout) {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  body.tm-workspace-body .tm-workspace-layout,
+  body:has(.tm-workspace-layout) .tm-workspace-layout {
+    flex: 1 1 0;
+    min-height: 0;
+    height: auto;
+    overflow: hidden;
+  }
+}
+
+.tm-stop-card img {
+  flex-shrink: 0;
+}
+
 @media (max-width: 991.98px) {
   .tm-workspace-layout {
     flex-direction: column;
@@ -873,6 +930,14 @@ a:hover {
   }
   body.view-map-active .tm-mobile-hide-on-itinerary {
     display: block !important;
+  }
+  body.view-map-active .tm-workspace-map {
+    height: calc(100dvh - 170px) !important;
+    min-height: 420px !important;
+  }
+  body.view-map-active #ws-map-container {
+    height: 100% !important;
+    min-height: 420px !important;
   }
 }
 
@@ -1253,6 +1318,16 @@ a:hover {
   }
   .tm-stop-card:hover {
     transform: none;
+  }
+  .tm-stop-card img {
+    width: 68px !important;
+    height: 68px !important;
+  }
+
+  #wt-search-suggestions {
+    width: calc(100vw - 32px) !important;
+    max-width: 100% !important;
+    left: 0 !important;
   }
 
   .tm-timeline {

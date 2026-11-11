@@ -58,6 +58,7 @@ set ERROR_CODE=0
 
 @REM ==== START VALIDATION ====
 if not "%JAVA_HOME%" == "" goto OkJHome
+if exist "C:\Program Files\Java\jdk-26.0.1" (set "JAVA_HOME=C:\Program Files\Java\jdk-26.0.1" & goto OkJHome)
 
 echo. >&2
 echo Error: JAVA_HOME not found in your environment. >&2
@@ -127,30 +128,26 @@ FOR /F "usebackq tokens=1,2 delims==" %%A IN ("%MAVEN_PROJECTBASEDIR%\.mvn\wrapp
 
 @REM Extension to allow automatically downloading the maven-wrapper.jar from Maven-central
 @REM This allows using the maven wrapper in projects that prohibit checking in binary data.
-if exist %WRAPPER_JAR% (
-    if "%MVNW_VERBOSE%" == "true" (
-        echo Found %WRAPPER_JAR%
-    )
-) else (
-    if not "%MVNW_REPOURL%" == "" (
-        SET WRAPPER_URL="%MVNW_REPOURL%/org/apache/maven/wrapper/maven-wrapper/3.3.4/maven-wrapper-3.3.4.jar"
-    )
-    if "%MVNW_VERBOSE%" == "true" (
-        echo Couldn't find %WRAPPER_JAR%, downloading it ...
-        echo Downloading from: %WRAPPER_URL%
-    )
-
-    powershell -Command "&{"^
-		"$webclient = new-object System.Net.WebClient;"^
-		"if (-not ([string]::IsNullOrEmpty('%MVNW_USERNAME%') -and [string]::IsNullOrEmpty('%MVNW_PASSWORD%'))) {"^
-		"$webclient.Credentials = new-object System.Net.NetworkCredential('%MVNW_USERNAME%', '%MVNW_PASSWORD%');"^
-		"}"^
-		"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $webclient.DownloadFile('%WRAPPER_URL%', '%WRAPPER_JAR%')"^
-		"}"
-    if "%MVNW_VERBOSE%" == "true" (
-        echo Finished downloading %WRAPPER_JAR%
-    )
+if exist %WRAPPER_JAR% goto wrapperJarExists
+if not "%MVNW_REPOURL%" == "" (
+    SET WRAPPER_URL="%MVNW_REPOURL%/org/apache/maven/wrapper/maven-wrapper/3.3.4/maven-wrapper-3.3.4.jar"
 )
+if "%MVNW_VERBOSE%" == "true" (
+    echo Couldn't find %WRAPPER_JAR%, downloading it ...
+    echo Downloading from: %WRAPPER_URL%
+)
+
+powershell -Command "&{"^
+	"$webclient = new-object System.Net.WebClient;"^
+	"if (-not ([string]::IsNullOrEmpty('%MVNW_USERNAME%') -and [string]::IsNullOrEmpty('%MVNW_PASSWORD%'))) {"^
+	"$webclient.Credentials = new-object System.Net.NetworkCredential('%MVNW_USERNAME%', '%MVNW_PASSWORD%');"^
+	"}"^
+	"[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $webclient.DownloadFile('%WRAPPER_URL%', '%WRAPPER_JAR%')"^
+	"}"
+if "%MVNW_VERBOSE%" == "true" (
+    echo Finished downloading %WRAPPER_JAR%
+)
+:wrapperJarExists
 @REM End of extension
 
 @REM If specified, validate the SHA-256 sum of the Maven wrapper jar file
@@ -158,19 +155,19 @@ SET WRAPPER_SHA_256_SUM=""
 FOR /F "usebackq tokens=1,2 delims==" %%A IN ("%MAVEN_PROJECTBASEDIR%\.mvn\wrapper\maven-wrapper.properties") DO (
     IF "%%A"=="wrapperSha256Sum" SET WRAPPER_SHA_256_SUM=%%B
 )
-IF NOT %WRAPPER_SHA_256_SUM%=="" (
-    powershell -Command "&{"^
-       "Import-Module $PSHOME\Modules\Microsoft.PowerShell.Utility -Function Get-FileHash;"^
-       "$hash = (Get-FileHash \"%WRAPPER_JAR%\" -Algorithm SHA256).Hash.ToLower();"^
-       "If('%WRAPPER_SHA_256_SUM%' -ne $hash){"^
-       "  Write-Error 'Error: Failed to validate Maven wrapper SHA-256, your Maven wrapper might be compromised.';"^
-       "  Write-Error 'Investigate or delete %WRAPPER_JAR% to attempt a clean download.';"^
-       "  Write-Error 'If you updated your Maven version, you need to update the specified wrapperSha256Sum property.';"^
-       "  exit 1;"^
-       "}"^
-       "}"
-    if ERRORLEVEL 1 goto error
-)
+IF %WRAPPER_SHA_256_SUM%=="" goto skipShaCheck
+powershell -Command "&{"^
+   "Import-Module $PSHOME\Modules\Microsoft.PowerShell.Utility -Function Get-FileHash;"^
+   "$hash = (Get-FileHash \"%WRAPPER_JAR%\" -Algorithm SHA256).Hash.ToLower();"^
+   "If('%WRAPPER_SHA_256_SUM%' -ne $hash){"^
+   "  Write-Error 'Error: Failed to validate Maven wrapper SHA-256, your Maven wrapper might be compromised.';"^
+   "  Write-Error 'Investigate or delete %WRAPPER_JAR% to attempt a clean download.';"^
+   "  Write-Error 'If you updated your Maven version, you need to update the specified wrapperSha256Sum property.';"^
+   "  exit 1;"^
+   "}"^
+   "}"
+if ERRORLEVEL 1 goto error
+:skipShaCheck
 
 @REM Provide a "standardized" way to retrieve the CLI args that will
 @REM work with both Windows and non-Windows executions.
